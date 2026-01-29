@@ -12,10 +12,11 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    border: 1px solid black;
 }
 
 .todo {
-    height: 450px;
+    height: auto;
     width: 900px;
     background: white;
     padding: 20px;
@@ -23,6 +24,18 @@
     flex-direction: column;
     gap: 6px;
     border-radius: 20px;
+    border: 4px solid black;
+    padding-bottom: 40px;
+    position: relative;
+}
+.pagination{
+    background-color: (233, 220, 220);
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+.pagination .btn{
+    width: 20px;
 }
 
 .top-card {
@@ -33,7 +46,7 @@
 .search-field {
     width: 90%;
 }
-
+ 
 /* DELETE POPUP */
 .delete-popup {
     height: 100px;
@@ -45,6 +58,7 @@
     left: 0;
     transform: translate(50%, -100%) scale(0);
     transition: 0.5s;
+    padding: 5px;
 }
 
 .container:has(.del) .delete-popup {
@@ -53,10 +67,21 @@
     transform: translate(-50%, -50%) scale(1);
 }
 
-.container:has(.del) > :not(.delete-popup) {
+.container:has(.del) > :not(.delete-popup){
     pointer-events: none;
     background-color: rgb(63, 58, 58);
 }
+
+
+ /* body:has(.container .del) {
+    pointer-events: none;
+    background-color: rgb(63, 58, 58);
+} */
+/*
+body:has(.container .del) .delete-popup {
+    pointer-events: auto;
+    background-color: white;
+} */
 
 .delete-popup .yes {
     position: absolute;
@@ -95,4 +120,14 @@ table {
     border-radius: 6px;
     padding: 8px;
     width: 200px;
+}
+
+.edit,.delete{
+    /* border: 2px solid red; */
+    width: max-content;
+}
+
+.grid-edit-del-buttons{
+    display: flex;
+    gap: 4px;
 }

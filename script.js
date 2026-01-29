@@ -2,16 +2,18 @@ const mainTable = document.querySelector(".main-table");
 const deletePopup = document.querySelector(".delete-popup");
 const todo = document.querySelector(".todo");
 const listDiv = document.querySelector(".list-div");
+const prevButton=document.querySelector(".prev");
+const nextButton=document.querySelector(".next");
+const pageNumbers=Math.ceil(JSON.parse(localStorage.getItem("myTodoTask")).length/10);
+console.log("pageNumbers",pageNumbers);
 
-/* 🔥 LOAD DATA ONCE */
+
 let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
 
-/* UI TOGGLE ONLY */
 function listGrid() {
     todo.classList.toggle("grid");
 }
 
-/* RENDER TABLE */
 function showTable() {
     mainTable.innerHTML = "";
 
@@ -32,7 +34,6 @@ function showTable() {
     `).join("");
 }
 
-/* RENDER GRID */
 function showGrid() {
     listDiv.innerHTML = "";
 
@@ -40,8 +41,10 @@ function showGrid() {
         <div class="grid-box" data-uid="${item.id}">
             <strong>${i + 1}. ${item.title}</strong>
             <p>${item.description}</p>
+            <div class="grid-edit-del-buttons">
             <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
             <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
         </div>
     `).join("");
 }
@@ -60,7 +63,7 @@ todo.addEventListener("click", (e) => {
     if (delBtn) {
         delBtn.closest("[data-uid]").classList.add("del");
     }
-
+     
     if (editBtn) {
         const id = editBtn.closest("[data-uid]").dataset.uid;
         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;

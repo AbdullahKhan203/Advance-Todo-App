@@ -60,6 +60,7 @@ document.getElementById("todoForm").addEventListener("submit", function(e) {
         // Add new task
         tasks.push(todoObject);
         console.log("New task added:", todoObject);
+        window.location.href="main.html"
     }
 
     // Save to localStorage
