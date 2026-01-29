@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+
+    <title>Advance Todo App</title>
+</head>
+<body>
+<div class="container">
+    <h1>Advance-Todo-App</h1>
+
+    <div class="todo">
+        <div class="top-card">
+            <input class="search-field" type="text" placeholder="search by title" />
+            <button onclick="listGrid()">
+                <i class="fa-solid fa-table-cells"></i>
+            </button>
+            <button onclick="window.location.href='GetData.html'">+</button>
+        </div>
+
+        <!-- TABLE VIEW -->
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Time</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody class="main-table"></tbody>
+        </table>
+
+        <!-- GRID VIEW -->
+        <div class="list-div"></div>
+    </div>
+
+    <!-- DELETE POPUP -->
+    <div class="delete-popup">
+        <p>Are you sure, you want to delete?</p>
+        <button class="yes">Yes</button>
+        <button class="no">No</button>
+    </div>
+</div>
+</body>
+</html>

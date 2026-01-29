@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./GetData.css">
+    <script src="./GetData.js" defer></script>
+    <title>Get Data Form</title>
+</head>
+<body>
+    <div class="get-data-form-container">
+        <h1 class="main-heading">Enter Todo Here</h1>
+    <!-- <form id="todoForm" onsubmit="handleSubmit(event)">
+
+        <label for="title">Enter Title</label>
+        <input name="title"  required   id="title" placeholder="enter title" onchange="handleChange('title', this.value)">
+        <br>  
+         <label for="description">Enter Description</label>
+         <input name="description" required  id="description" type="text" placeholder="enter description" onchange="handleChange('description', this.value)">
+         <br>
+         <label for="location">Enter Location</label>
+         <input name="location"  required  id="location" type="text" placeholder="enter location"   onchange="handleChange('location', this.value)">
+         <br>
+         <label for="email">Enter Email</label>
+        <input name="email"  required  id="email" type="email" placeholder="enter email"   onchange="handleChange('email', this.value)">
+        <br>
+        <label for="status">Choose Status:</label>
+<select  required name="status"  id="status"  required onchange="handleChange('status', this.value)">
+    <option value="">Seletct Status</option>
+    <option value="pending">Pending</option>
+  <option value="inProgress">In Progress</option>
+  <option value="done">Done</option>
+</select>
+<br>
+        <label for="category">Choose Category:</label>
+<select name="category" id="category"  required onchange="handleChange('category', this.value)" >
+     <option value="">Seletct Catagory</option>
+    <option value="personal">Personal</option>
+  <option value="delegated">Delegated</option>
+</select>
+<br>
+        <label for="priority">Choose Priority:</label>
+<select name="priority" id="priority"  required onchange="handleChange('priority', this.value)">
+     <option value="">Seletct Pririty</option>
+    <option value="high">High</option>
+  <option value="low">Low</option>
+  <option value="medium">Medium</option>
+</select>
+        <br>
+        <input required type="time" name="time" placeholder="enter time" id=""   onchange="handleChange('time', this.value)">
+        <br>
+        <button type="submit">Submit</button>
+    </form> -->
+  <form id="todoForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <input type="text" id="description" placeholder="Description" required />
+    <input type="text" id="location" placeholder="Location" />
+    <input type="email" id="email" placeholder="Email" />
+    <select id="status" required>
+        <option value="">Select Status</option>
+        <option value="pending">Pending</option>
+        <option value="inProgress">In Progress</option>
+        <option value="done">Done</option>
+    </select>
+    <select id="category" required>
+        <option value="">Select Category</option>
+        <option value="personal">Personal</option>
+        <option value="delegated">Delegated</option>
+    </select>
+    <select id="priority" required>
+        <option value="">Select Priority</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <input type="time" id="time" />
+    <button id="submit-btn" type="submit">Save</button>
+</form>
+  </div>
+</body>
+</html>
