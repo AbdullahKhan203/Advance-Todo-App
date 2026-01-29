@@ -2,13 +2,57 @@ const mainTable = document.querySelector(".main-table");
 const deletePopup = document.querySelector(".delete-popup");
 const todo = document.querySelector(".todo");
 const listDiv = document.querySelector(".list-div");
-const prevButton=document.querySelector(".prev");
-const nextButton=document.querySelector(".next");
-const pageNumbers=Math.ceil(JSON.parse(localStorage.getItem("myTodoTask")).length/10);
-console.log("pageNumbers",pageNumbers);
+// const prevButton=document.querySelector(".prev");
+// const nextButton=document.querySelector(".next");
+// const pageNumbers=Math.ceil(JSON.parse(localStorage.getItem("myTodoTask")).length/10);
+// console.log("pageNumbers",pageNumbers);
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const pageInfo = document.getElementById("page-info");
 
 
 let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
+
+let currentPage = 1;
+const itemsPerPage = 10;
+
+function getPaginatedTodos() {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return todos.slice(start, end);
+}
+
+
+function updatePaginationUI() {
+    const totalPages = Math.ceil(todos.length / itemsPerPage);
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+}
+
+function render() {
+    showTable();
+    showGrid();
+    updatePaginationUI();
+}
+
+prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        render();
+    }
+});
+
+nextBtn.addEventListener("click", () => {
+    const totalPages = Math.ceil(todos.length / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        render();
+    }
+});
+
+window.addEventListener("DOMContentLoaded", render);
 
 function listGrid() {
     todo.classList.toggle("grid");
@@ -17,9 +61,13 @@ function listGrid() {
 function showTable() {
     mainTable.innerHTML = "";
 
-    mainTable.innerHTML = todos.map((item, i) => `
+    const pageTodos = getPaginatedTodos();
+
+
+
+    mainTable.innerHTML = pageTodos.map((item, i) => `
         <tr data-uid="${item.id}">
-            <td>${i + 1}</td>
+            <td>${(currentPage - 1) * itemsPerPage + i + 1}</td>
             <td>${item.title}</td>
             <td>${item.description}</td>
             <td>${item.location}</td>
@@ -37,9 +85,11 @@ function showTable() {
 function showGrid() {
     listDiv.innerHTML = "";
 
-    listDiv.innerHTML = todos.map((item, i) => `
+     const pageTodos = getPaginatedTodos();
+
+    listDiv.innerHTML = pageTodos.map((item, i) => `
         <div class="grid-box" data-uid="${item.id}">
-            <strong>${i + 1}. ${item.title}</strong>
+            <strong>${(currentPage - 1) * itemsPerPage + i + 1}. ${item.title}</strong>
             <p>${item.description}</p>
             <div class="grid-edit-del-buttons">
             <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
