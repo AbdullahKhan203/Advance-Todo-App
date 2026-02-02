@@ -17,7 +17,7 @@
 
     <div class="todo">
         <div class="top-card">
-            <input class="search-field" type="text" placeholder="search by title" />
+            <input class="search-field" onchange="handleChange(this.value)" type="text" placeholder="search by title" />
             <button onclick="listGrid()">
                 <i class="fa-solid fa-table-cells"></i>
             </button>
