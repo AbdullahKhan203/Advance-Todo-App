@@ -21,6 +21,9 @@
             <button onclick="listGrid()">
                 <i class="fa-solid fa-table-cells"></i>
             </button>
+            <button onclick="filter()">
+                <i class="fa-solid fa-filter"></i>
+            </button>
             <button onclick="window.location.href='GetData.html'">+</button>
         </div>
 
@@ -59,6 +62,18 @@
         <p>Are you sure, you want to delete?</p>
         <button class="yes">Yes</button>
         <button class="no">No</button>
+    </div>
+    <!-- DELETE POPUP -->
+    <div class="filter-popup">
+        <button class="close-filter-icon"><i class="fa-solid fa-x"></i></button>
+        <label for="status">Select Status</label>
+        <br>
+        <select class="select-status-filter-options" value="" id="status">
+            <option value="all">All</option>
+            <option value="done">Done</option>
+            <option value="inProgress">InProgress</option>
+            <option value="pending">Pending</option>
+        </select>
     </div>
 </div>
 </body>

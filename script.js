@@ -1,11 +1,10 @@
 const mainTable = document.querySelector(".main-table");
 const deletePopup = document.querySelector(".delete-popup");
+const filterPopup = document.querySelector(".filter-popup");
 const todo = document.querySelector(".todo");
 const listDiv = document.querySelector(".list-div");
-// const prevButton=document.querySelector(".prev");
-// const nextButton=document.querySelector(".next");
-// const pageNumbers=Math.ceil(JSON.parse(localStorage.getItem("myTodoTask")).length/10);
-// console.log("pageNumbers",pageNumbers);
+const closeFilterIcon = document.querySelector(".close-filter-icon");
+const selectStatusFilterOption = document.querySelector(".select-status-filter-options");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const pageInfo = document.getElementById("page-info");
@@ -54,16 +53,18 @@ nextBtn.addEventListener("click", () => {
 
 window.addEventListener("DOMContentLoaded", render);
 
+
 function listGrid() {
     todo.classList.toggle("grid");
+}
+function filter() {
+    todo.classList.toggle("filter");
 }
 
 function showTable() {
     mainTable.innerHTML = "";
 
     const pageTodos = getPaginatedTodos();
-
-
 
     mainTable.innerHTML = pageTodos.map((item, i) => `
         <tr data-uid="${item.id}">
@@ -136,4 +137,21 @@ deletePopup.addEventListener("click", (e) => {
     if (e.target.classList.contains("no")) {
         document.querySelector(".del")?.classList.remove("del");
     }
+});
+closeFilterIcon.addEventListener("click", (e) => {
+
+     todo.classList.toggle('filter')
+     
+    });
+selectStatusFilterOption.addEventListener('change', (event) => {
+        // Get the selected value
+        const selectedValue = event.target.value;
+        console.log('Option selected:', selectedValue);
+                todos=selectedValue == "all" ? JSON.parse(localStorage.getItem('myTodoTask')) : JSON.parse(localStorage.getItem('myTodoTask')).filter(item=>item.status==selectedValue)
+                render();
+        // You can also get the selected option element's text
+        const selectedIndex = event.target.selectedIndex;
+        const selectedOptionText = event.target.options[selectedIndex].text;
+        console.log('Selected text:', selectedOptionText);
+        todo.classList.toggle('filter')
 });
