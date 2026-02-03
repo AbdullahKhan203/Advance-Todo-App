@@ -14,10 +14,9 @@
 <body>
 <div class="container">
     <h1>Advance-Todo-App</h1>
-
     <div class="todo">
         <div class="top-card">
-            <input class="search-field" onchange="handleChange(this.value)" type="text" placeholder="search by title" />
+            <input class="search-field" oninput="handleChange(this.value)" type="text" placeholder="search by title" />
             <button onclick="listGrid()">
                 <i class="fa-solid fa-table-cells"></i>
             </button>
@@ -27,7 +26,6 @@
             <button onclick="window.location.href='GetData.html'">+</button>
         </div>
 
-        <!-- TABLE VIEW -->
         <table>
             <thead>
             <tr>
@@ -47,7 +45,6 @@
             <tbody class="main-table"></tbody>
         </table>
 
-        <!-- GRID VIEW -->
         <div class="list-div"></div>
 
        <div class="pagination">
@@ -57,13 +54,11 @@
        </div>
     </div>
 
-    <!-- DELETE POPUP -->
     <div class="delete-popup">
         <p>Are you sure, you want to delete?</p>
         <button class="yes">Yes</button>
         <button class="no">No</button>
     </div>
-    <!-- DELETE POPUP -->
     <div class="filter-popup">
         <button class="close-filter-icon"><i class="fa-solid fa-x"></i></button>
         <label for="status">Select Status</label>

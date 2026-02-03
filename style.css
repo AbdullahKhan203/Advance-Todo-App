@@ -16,9 +16,16 @@
     border: 1px solid black;
 }
 
+h1{
+    display: block;
+    text-align: center;
+}
+
 .todo {
     height: 500px;
+    /* height: auto; */
     max-width: 900px;
+    width: 80%;
     background: white;
     padding: 20px;
     display: flex;
@@ -30,18 +37,22 @@
     position: relative;
     /* overflow-x: auto; */
 }
+
 .pagination{
     background-color: (233, 220, 220);
     position: absolute;
     right: 20px;
     bottom: 10px;
 }
+
 .pagination .btn{
     width: 20px;
 }
 
 .top-card {
     display: flex;
+    
+    flex-wrap: wrap;
     gap: 5px;
 }
 
@@ -53,7 +64,7 @@
 .delete-popup {
     height: 100px;
     width: 300px;
-    background: white;
+    background-color: rgb(233, 220, 220);
     border-radius: 5px;
     position: fixed;
     top: 0;
@@ -65,17 +76,26 @@
 
 
 
+
 .container:has(.del) .delete-popup {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
 }
 
+/* .container:has(.del) > :not(.delete-popup){
+    pointer-events: none;
+    .todo{
+    background-color: rgb(63, 58, 58);
+    }
+} */
+
 .container:has(.del) > :not(.delete-popup){
     pointer-events: none;
-    background-color: rgb(63, 58, 58);
 }
-
+.container:has(.del) .todo{
+    background-color: rgb(63, 58, 58);
+    }
 
  /* body:has(.container .del) {
     pointer-events: none;
@@ -104,7 +124,7 @@ body:has(.container .del) .delete-popup {
 .filter-popup {
     height: 100px;
     width: 300px;
-    background: white;
+     background-color: rgb(233, 220, 220);
     border-radius: 5px;
     position: fixed;
     top: 0;
@@ -113,12 +133,11 @@ body:has(.container .del) .delete-popup {
     transition: 0.5s;
     padding: 5px;
 }
+
 .close-filter-icon{
     position: absolute;
     right: 5px;
 }
-
-
 
 .container:has(.filter) .filter-popup {
     top: 50%;
@@ -126,11 +145,22 @@ body:has(.container .del) .delete-popup {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.container:has(.filter) > :not(.filter-popup){
+/* .container:has(.filter) > :not(.filter-popup){
     pointer-events: none;
+    .todo{
+    background-color: rgb(63, 58, 58);
+    }
+} */
+
+.container:has(.filter) > :not(.filter-popup) {
+    pointer-events: none;
+}
+
+.container:has(.filter) .todo {
     background-color: rgb(63, 58, 58);
 }
-/* VIEW CONTROL */
+
+
 table {
     display: table;
 }
@@ -141,9 +171,6 @@ table {
     flex-wrap: wrap;
 }
 
-
-
-/* GRID Code */
 .grid table {
     display: none;
 }
@@ -169,11 +196,24 @@ table {
     gap: 4px;
 }
 
-
-
-@media (max-width:600px) {
+@media (max-width:900px) {
     .container{
-        width: 100%;
-        height: 100vh;
+       /* overflow-y: auto; */
+       gap: 2px;
+       height: 100%;
     }
+     .todo{
+        height: auto;
+        overflow-x: auto;
+        overflow-y: auto;
+     }
+}
+
+@media (max-width:830px){
+   .search-field{
+    width: 50%;
+   }
+   .todo{
+    width: 100%;
+   }
 }
