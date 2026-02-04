@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./GetData.css">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net">
+<!-- js file link -->
     <script src="./GetData.js" defer></script>
     <title>Get Data Form</title>
 </head>
@@ -52,30 +59,35 @@
         <button type="submit">Submit</button>
     </form> -->
   <form id="todoForm">
-    <input type="text" id="title" placeholder="Title" required />
-    <input type="text" id="description" placeholder="Description" required />
-    <input type="text" id="location" placeholder="Location" />
-    <input type="email" id="email" placeholder="Email" />
-    <select id="status" required>
+    <input class="input-field" type="text" id="title" placeholder="Title" required />
+    <input class="input-field"  type="text" id="description" placeholder="Description" required />
+    <input class="input-field"  type="text" id="location" placeholder="Location"  required/>
+    <input class="input-field"  type="email" id="email" placeholder="Email" required/>
+    <select class="input-field  form-select"  id="status" required>
         <option value="">Select Status</option>
         <option value="pending">Pending</option>
         <option value="inProgress">In Progress</option>
         <option value="done">Done</option>
     </select>
-    <select id="category" required>
+    <select class="input-field  form-select"  id="category" required>
         <option value="">Select Category</option>
         <option value="personal">Personal</option>
         <option value="delegated">Delegated</option>
     </select>
-    <select id="priority" required>
+    <select class="input-field"  id="priority" required>
         <option value="">Select Priority</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
     </select>
-    <input type="time" id="time" />
-    <button id="submit-btn" type="submit">Save</button>
+    <input class="input-field"  type="time" id="time" required />
+    <button id="submit-btn" type="submit" class="btn btn-success">Save</button>
 </form>
   </div>
+
+
+  <!-- Bootstrap JS Bundle (with Popper) -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
 </body>
 </html>

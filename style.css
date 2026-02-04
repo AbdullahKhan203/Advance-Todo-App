@@ -4,10 +4,18 @@
     box-sizing: border-box;
 }
 
-.container {
-    height: 100vh;
+
+h1{
+  font-family:  cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.main-container {
+    min-height: 100vh;
     width: 100%;
-    background-color: rgb(233, 220, 220);
+    /* background-color: 59d102; */
+     /* background: linear-gradient(to bottom right, #00FFFF, #AAFF00); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,18 +32,27 @@ h1{
 .todo {
     height: 500px;
     /* height: auto; */
-    max-width: 900px;
-    width: 80%;
+    /* max-width: 900px; */
+    width: 100%;
     background: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 6px;
     border-radius: 20px;
-    border: 4px solid black;
+    /* border: 1px solid black; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding-bottom: 40px;
     position: relative;
     /* overflow-x: auto; */
+}
+
+.current-page-number{
+font-weight: bold;
+}
+
+tr:hover{
+    background-color: rgb(208, 230, 237);
 }
 
 .pagination{
@@ -57,10 +74,18 @@ h1{
 }
 
 .search-field {
-    width: 90%;
+    width: 80%;
     padding-inline: 10px;
 }
- 
+/* remove table border */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none;
+  opacity: 0.8;
+  background: transparent;
+}
+
 .delete-popup {
     height: 100px;
     width: 300px;
@@ -77,35 +102,25 @@ h1{
 
 
 
-.container:has(.del) .delete-popup {
+.main-container:has(.del) .delete-popup {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* .container:has(.del) > :not(.delete-popup){
+/* .main-container:has(.del) > :not(.delete-popup){
     pointer-events: none;
     .todo{
     background-color: rgb(63, 58, 58);
     }
 } */
 
-.container:has(.del) > :not(.delete-popup){
+/* .main-container:has(.del) > :not(.delete-popup){
     pointer-events: none;
 }
-.container:has(.del) .todo{
+.main-container:has(.del) .todo{
     background-color: rgb(63, 58, 58);
-    }
-
- /* body:has(.container .del) {
-    pointer-events: none;
-    background-color: rgb(63, 58, 58);
-} */
-/*
-body:has(.container .del) .delete-popup {
-    pointer-events: auto;
-    background-color: white;
-} */
+    } */
 
 .delete-popup .yes {
     position: absolute;
@@ -119,10 +134,8 @@ body:has(.container .del) .delete-popup {
     right: 10px;
 }
 
-
-
 .filter-popup {
-    height: 100px;
+    height: 200px;
     width: 300px;
      background-color: rgb(233, 220, 220);
     border-radius: 5px;
@@ -137,27 +150,32 @@ body:has(.container .del) .delete-popup {
 .close-filter-icon{
     position: absolute;
     right: 5px;
+    border: none;
+    background-color: transparent;
 }
 
-.container:has(.filter) .filter-popup {
+.main-container:has(.filter) .filter-popup {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* .container:has(.filter) > :not(.filter-popup){
-    pointer-events: none;
-    .todo{
-    background-color: rgb(63, 58, 58);
-    }
-} */
-
-.container:has(.filter) > :not(.filter-popup) {
+/* .main-container:has(.filter) > :not(.filter-popup) {
     pointer-events: none;
 }
 
-.container:has(.filter) .todo {
+.main-container:has(.filter) .todo {
     background-color: rgb(63, 58, 58);
+} */
+
+.main-container:has(.filter) > :not(.filter-popup),
+.main-container:has(.del) > :not(.delete-popup) {
+    pointer-events: none;
+}
+
+.main-container:has(.filter) .todo,
+.main-container:has(.del) .todo {
+    background-color: rgb(63, 58, 58) !important;
 }
 
 
@@ -187,8 +205,13 @@ table {
 }
 
 .edit,.delete{
-    /* border: 2px solid red; */
     width: max-content;
+}
+.edit i{
+   color: blue;
+}
+.delete i{
+    color: red;
 }
 
 .grid-edit-del-buttons{
@@ -197,7 +220,7 @@ table {
 }
 
 @media (max-width:900px) {
-    .container{
+    .main-container{
        /* overflow-y: auto; */
        gap: 2px;
        height: 100%;

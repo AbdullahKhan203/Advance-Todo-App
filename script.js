@@ -8,6 +8,20 @@ const selectStatusFilterOption = document.querySelector(".select-status-filter-o
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const pageInfo = document.getElementById("page-info");
+const rows=document.getElementsByTagName('tr')
+
+function addStyles() {
+  for (let i = 1; i < rows.length; i++) {
+    if (i % 2 === 0) {
+      // Remove '.style' before classList
+      rows[i].classList.add('table-primary');
+    } else {
+      // Fixed typo: 'table-secondry' to 'table-secondary'
+      rows[i].classList.add('table-secondary');
+    }
+  }
+}
+
 
 let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
 let filteredTodos = [...todos];
@@ -27,7 +41,7 @@ function getPaginatedTodos() {
 
 function updatePaginationUI() {
     const totalPages = Math.ceil(filteredTodos.length / itemsPerPage) || 1;
-    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    pageInfo.innerHTML = `Page  <span class="current-page-number">${currentPage}</span> of ${totalPages}`;
    
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
@@ -37,6 +51,7 @@ function render() {
     showTable();
     showGrid();
     updatePaginationUI();
+    addStyles();
 }
 
 prevBtn.addEventListener("click", () => {
@@ -104,7 +119,7 @@ function showTable() {
     }
 
     mainTable.innerHTML = pageTodos.map((item, i) => `
-        <tr data-uid="${item.id}">
+        <tr class="border-top" data-uid="${item.id}">
             <td>${(currentPage - 1) * itemsPerPage + i + 1}</td>
             <td>${item.title}</td>
             <td>${item.description}</td>
@@ -150,7 +165,7 @@ function showGrid() {
     }
 
     listDiv.innerHTML = pageTodos.map((item, i) => `
-        <div class="grid-box" data-uid="${item.id}">
+        <div class="grid-box border" data-uid="${item.id}">
             <strong>${(currentPage - 1) * itemsPerPage + i + 1}. ${item.title}</strong>
             <p>${item.description}</p>
             <div class="grid-edit-del-buttons">
