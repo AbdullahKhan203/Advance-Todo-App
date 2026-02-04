@@ -27,18 +27,20 @@
     <div class="todo bg-light">
         <div class="top-card">
             <input class="search-field" oninput="handleChange(this.value)" type="text" placeholder="search by title" />
-            <button   type="button" class="btn btn-outline-primary"  onclick="listGrid()">
+            <button id="grid-button"   type="button" class="btn btn-outline-primary"  onclick="listGrid()">
                 <i class="fa-solid fa-table-cells"></i>
             </button>
-            <button  type="button" class="btn btn-outline-info"  onclick="filter()">
+            <button id="filter-button" type="button" class="btn btn-outline-info"  onclick="filter()">
                 <i class="fa-solid fa-filter"></i>
             </button>
             <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='GetData.html'"><i class="fa-solid fa-plus"></i></button>
+            <button type="button" class="btn btn-outline-secondary delete-multiple-btn" onclick="deleteMultiple()"><i class="fa-solid fa-circle-minus"></i></button>
         </div>
 
         <table class="table-sm table-success">
             <thead>
             <tr>
+                <th class="checkbox-header"></th>
                 <th>#</th>
                 <th>Title</th>
                 <th>Description</th>
@@ -54,9 +56,9 @@
             </thead>
             <tbody class="table-group-divider main-table"></tbody>
         </table>
-
+    
         <div class="list-div"></div>
-
+        
        <div class="pagination">
     <button id="prev"  type="button" class="btn btn-outline-secondary d-flex justigy-content-center  align-items-center me-2"><i class="fa-solid fa-angle-left"></i></button>
     <span id="page-info"></span>
@@ -64,11 +66,11 @@
        </div>
     </div>
 
-    <div class="delete-popup">
+    <!-- <div class="delete-popup">
         <p>Are you sure, you want to delete?</p>
         <button class="yes btn btn-sm btn-danger me-2">Yes</button>
         <button class="no btn btn-sm btn-success">No</button>
-    </div>
+    </div> -->
     <div class=" filter-popup">
         <button class="close-filter-icon"><i class="fa-solid fa-x"></i></button>
         <label for="status">Select Status</label>

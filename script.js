@@ -120,6 +120,7 @@ function showTable() {
 
     mainTable.innerHTML = pageTodos.map((item, i) => `
         <tr class="border-top" data-uid="${item.id}">
+            <td class="checkbox"><input type="checkbox" name="" id=""></td>
             <td>${(currentPage - 1) * itemsPerPage + i + 1}</td>
             <td>${item.title}</td>
             <td>${item.description}</td>
@@ -154,6 +155,30 @@ function showTable() {
 //     `).join("");
 // }
 
+// function showGrid() {
+//     listDiv.innerHTML = "";
+
+//     const pageTodos = getPaginatedTodos();
+
+//     if (filteredTodos.length === 0) {
+//         listDiv.innerHTML = `<p><strong>Todos not found for this title</strong></p>`;
+//         return;
+//     }
+
+//     listDiv.innerHTML = pageTodos.map((item, i) => `
+//         <div class="grid-box border" data-uid="${item.id}">
+        
+//             <strong>${(currentPage - 1) * itemsPerPage + i + 1}. ${item.title}</strong>
+//             <p>${item.description}</p>
+//             <div class="grid-edit-del-buttons">
+//                 <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
+//                 <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
+//                 <div class="checkbox"><input type="checkbox" name="" id=""></div>
+//             </div>
+//         </div>
+//     `).join("");
+// }
+
 function showGrid() {
     listDiv.innerHTML = "";
 
@@ -171,6 +196,10 @@ function showGrid() {
             <div class="grid-edit-del-buttons">
                 <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
                 <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
+                <div class="checkbox">
+                    <!-- Add data-uid here for checkbox -->
+                    <input type="checkbox" data-uid="${item.id}">
+                </div>
             </div>
         </div>
     `).join("");
@@ -182,7 +211,11 @@ todo.addEventListener("click", (e) => {
     const editBtn = e.target.closest(".edit");
 
     if (delBtn) {
-        delBtn.closest("[data-uid]").classList.add("del");
+        // delBtn.closest("[data-uid]").classList.add("del");
+        document.querySelector('.main-container').classList.toggle("del")
+        console.log("delete button clicked");
+        
+        
     }
      
     if (editBtn) {
@@ -192,22 +225,22 @@ todo.addEventListener("click", (e) => {
 });
 
 
-deletePopup.addEventListener("click", (e) => {
-    if (e.target.classList.contains("yes")) {
-        const delItem = document.querySelector(".del");
-        const id = delItem.dataset.uid;
+// deletePopup.addEventListener("click", (e) => {
+//     if (e.target.classList.contains("yes")) {
+//         const delItem = document.querySelector(".del");
+//         const id = delItem.dataset.uid;
+         
+//         todos = todos.filter(t => t.id !== id);
+//         filteredTodos = filteredTodos.filter(t => t.id !== id);
 
-        todos = todos.filter(t => t.id !== id);
-        filteredTodos = filteredTodos.filter(t => t.id !== id);
+//         localStorage.setItem("myTodoTask", JSON.stringify(todos));
+//         render();
+//     }
 
-        localStorage.setItem("myTodoTask", JSON.stringify(todos));
-        render();
-    }
-
-    if (e.target.classList.contains("no")) {
-        document.querySelector(".del")?.classList.remove("del");
-    }
-});
+//     if (e.target.classList.contains("no")) {
+//         document.querySelector(".del")?.classList.remove("del");
+//     }
+// });
 
 
 closeFilterIcon.addEventListener("click", (e) => {
@@ -260,4 +293,43 @@ function handleChange(value) {
         currentPage = 1;
         render();
     }, delay);
+}
+
+
+
+function deleteMultiple() {
+    console.log("delete multiple applied");
+
+    // Toggle the del class for UI
+    document.querySelector('.main-container').classList.toggle('del');
+
+    // Select all checkboxes in both table and grid
+    const checkboxInputs = document.querySelectorAll('.checkbox input[type="checkbox"]');
+
+    let checkedInputfieldsIds = [];
+
+    checkboxInputs.forEach(cb => {
+        if (cb.checked) {
+            // Use data-uid on checkbox if exists (grid)
+            // fallback to closest parent with data-uid (table)
+            const uid = cb.dataset.uid || cb.closest('[data-uid]').dataset.uid;
+            checkedInputfieldsIds.push(uid);
+        }
+    });
+
+    console.log("checkedInputfieldsIds", checkedInputfieldsIds);
+
+    if (checkedInputfieldsIds.length === 0) return;
+
+    let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
+
+    // Keep only todos that are NOT checked
+    let remainingTodos = todos.filter(todo => !checkedInputfieldsIds.includes(todo.id));
+
+    // Save updated todos to localStorage
+    localStorage.setItem("myTodoTask", JSON.stringify(remainingTodos));
+
+    // Re-render the UI
+    render();
+    window.location.reload();
 }
