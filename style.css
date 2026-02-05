@@ -107,6 +107,31 @@ table {
   background: transparent;
 }
 
+th {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.asend-desend-div {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 6px;
+}
+
+.asend-desend-div button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 10px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+
+
+
+
 /* .delete-popup {
     height: 100px;
     width: 300px;
@@ -240,6 +265,21 @@ table {
 .grid-edit-del-buttons{
     display: flex;
     gap: 4px;
+}
+
+
+.asend-desend-div{
+    display: flex;
+
+    /* flex-wrap: nowrap; */
+    flex-direction: column;
+}
+.asend-desend-div button{
+    display: flex;
+    border-radius: 50%;
+    width: 10px;
+    height: 15px;
+    /* flex-wrap: nowrap; */
 }
 
 @media (max-width:900px) {

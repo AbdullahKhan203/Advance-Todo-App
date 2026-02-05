@@ -9,6 +9,9 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const pageInfo = document.getElementById("page-info");
 const rows=document.getElementsByTagName('tr')
+// const asendingBtn = document.querySelector(".asending-btn");
+// const descendingBtn = document.querySelector(".descending-btn");
+// const asendingDescendingDiv = document.querySelector(".asend-desend-div");
 
 function addStyles() {
   for (let i = 1; i < rows.length; i++) {
@@ -52,6 +55,7 @@ function render() {
     showGrid();
     updatePaginationUI();
     addStyles();
+    showAsenDesBtn();
 }
 
 prevBtn.addEventListener("click", () => {
@@ -209,18 +213,27 @@ function showGrid() {
 todo.addEventListener("click", (e) => {
     const delBtn = e.target.closest(".delete");
     const editBtn = e.target.closest(".edit");
+     const asendingBtn = e.target.closest(".asending-btn");
+    const descendingBtn = e.target.closest(".descending-btn");
+
 
     if (delBtn) {
         // delBtn.closest("[data-uid]").classList.add("del");
         document.querySelector('.main-container').classList.toggle("del")
         console.log("delete button clicked");
-        
-        
     }
      
     if (editBtn) {
         const id = editBtn.closest("[data-uid]").dataset.uid;
         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;
+    }
+
+    if (asendingBtn) {
+       console.log("asending btn licked");
+       
+    }
+    if (descendingBtn) {
+        console.log("descending btn licked");
     }
 });
 
@@ -310,8 +323,6 @@ function deleteMultiple() {
 
     checkboxInputs.forEach(cb => {
         if (cb.checked) {
-            // Use data-uid on checkbox if exists (grid)
-            // fallback to closest parent with data-uid (table)
             const uid = cb.dataset.uid || cb.closest('[data-uid]').dataset.uid;
             checkedInputfieldsIds.push(uid);
         }
@@ -323,13 +334,46 @@ function deleteMultiple() {
 
     let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
 
-    // Keep only todos that are NOT checked
     let remainingTodos = todos.filter(todo => !checkedInputfieldsIds.includes(todo.id));
 
-    // Save updated todos to localStorage
     localStorage.setItem("myTodoTask", JSON.stringify(remainingTodos));
 
-    // Re-render the UI
     render();
     window.location.reload();
 }
+
+
+
+function showAsenDesBtn() {
+    let allHeadings = document.querySelectorAll('th');
+
+    for (let i = 1; i < allHeadings.length-2; i++) {
+
+        // prevent multiple inserts
+        if (allHeadings[i].querySelector('.asend-desend-div')) continue;
+
+        allHeadings[i].insertAdjacentHTML(
+            'beforeend',
+            `<div class="asend-desend-div">
+                <button class="descending-btn">▲</button>
+                <button class="asending-btn">▼</button>
+            </div>`
+        );
+    }
+}
+
+
+// asendingDescendingDiv.addEventListener('click',(e)=>{
+//      const asendingBtn = e.target.closest(".asendingBtn");
+//     const descendingBtn = e.target.closest(".descending-btn");
+
+//     if(asendingBtn){
+//         console.log("asending btn clicked");
+//     }
+//     if(descendingBtn){
+//         console.log("asending btn clicked");
+//     }
+// })
+
+
+
