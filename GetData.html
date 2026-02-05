@@ -59,27 +59,35 @@
         <button type="submit">Submit</button>
     </form> -->
   <form id="todoForm">
+    <label for="title">Title</label>
     <input class="input-field" type="text" id="title" placeholder="Title" required />
+    <label for="description">Description</label>
     <input class="input-field"  type="text" id="description" placeholder="Description" required />
+    <label for="location">Location</label>
     <input class="input-field"  type="text" id="location" placeholder="Location"  required/>
+    <label for="email">Email</label>
     <input class="input-field"  type="email" id="email" placeholder="Email" required/>
+    <label for="status">Status</label>
     <select class="input-field  form-select"  id="status" required>
         <option value="">Select Status</option>
         <option value="pending">Pending</option>
         <option value="inProgress">In Progress</option>
         <option value="done">Done</option>
     </select>
+    <label for="category">Category</label>
     <select class="input-field  form-select"  id="category" required>
         <option value="">Select Category</option>
         <option value="personal">Personal</option>
         <option value="delegated">Delegated</option>
     </select>
+    <label for="priority">Priority</label>
     <select class="input-field"  id="priority" required>
         <option value="">Select Priority</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
     </select>
+    <label for="time">Priority</label>
     <input class="input-field"  type="time" id="time" required />
     <button id="submit-btn" type="submit" class="btn btn-success">Save</button>
 </form>

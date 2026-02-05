@@ -73,4 +73,6 @@ document.getElementById("todoForm").addEventListener("submit", function(e) {
     if (typeof showTable === "function") {
         showTable();
     }
+
+    location.replace("main.html")
 });

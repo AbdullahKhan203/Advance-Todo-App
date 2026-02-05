@@ -47,8 +47,8 @@ h1{
 }
 
 .todo {
-    height: 500px;
-    /* height: auto; */
+    /* height: 500px; */
+    height: auto;
     /* max-width: 900px; */
     width: 100%;
     background: white;
@@ -108,27 +108,30 @@ table {
 }
 
 th {
-    white-space: nowrap;
+    white-space: nowrap;          /* ❌ prevent wrapping */
     vertical-align: middle;
 }
 
-.asend-desend-div {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    margin-left: 6px;
+th i {
+    margin-left: 6px;             /* space between text and icon */
+    font-size: 0.9em;             /* optional: slightly smaller icon */
 }
 
-.asend-desend-div button {
-    padding: 0;
-    border: none;
-    background: transparent;
-    font-size: 10px;
-    cursor: pointer;
-    line-height: 1;
+th .inactive {
+  display: inline-block;
 }
 
+th .active {
+  display: none;
+}
 
+th.active-heading .inactive {
+  display: none;
+}
+
+th.active-heading .active {
+  display: inline-block;
+}
 
 
 
@@ -269,17 +272,24 @@ table {
 
 
 .asend-desend-div{
+    /* border:1px solid red; */
     display: flex;
-
+    gap: 0px;
     /* flex-wrap: nowrap; */
     flex-direction: column;
 }
 .asend-desend-div button{
+    /* border:1px solid red; */
     display: flex;
     border-radius: 50%;
     width: 10px;
     height: 15px;
     /* flex-wrap: nowrap; */
+    margin: 0;
+  padding: 0;
+}
+.asend-desend-div >:first-child{
+    transform: translateY(25%);
 }
 
 @media (max-width:900px) {

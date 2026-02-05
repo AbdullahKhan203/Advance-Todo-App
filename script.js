@@ -1,6 +1,7 @@
 const mainTable = document.querySelector(".main-table");
 const deletePopup = document.querySelector(".delete-popup");
 const filterPopup = document.querySelector(".filter-popup");
+const thead = document.querySelector("thead");
 const todo = document.querySelector(".todo");
 const listDiv = document.querySelector(".list-div");
 const closeFilterIcon = document.querySelector(".close-filter-icon");
@@ -9,29 +10,23 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const pageInfo = document.getElementById("page-info");
 const rows=document.getElementsByTagName('tr')
-// const asendingBtn = document.querySelector(".asending-btn");
-// const descendingBtn = document.querySelector(".descending-btn");
-// const asendingDescendingDiv = document.querySelector(".asend-desend-div");
+
 
 function addStyles() {
   for (let i = 1; i < rows.length; i++) {
     if (i % 2 === 0) {
-      // Remove '.style' before classList
       rows[i].classList.add('table-primary');
     } else {
-      // Fixed typo: 'table-secondry' to 'table-secondary'
       rows[i].classList.add('table-secondary');
     }
   }
 }
 
-
 let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
 let filteredTodos = [...todos];
 
 let searchTimer = null;
-const delay = 2000; 
-
+const delay = 500; 
 
 let currentPage = 1;
 const itemsPerPage = 10;
@@ -84,28 +79,6 @@ function filter() {
     todo.classList.toggle("filter");
 }
 
-// function showTable() {
-//     mainTable.innerHTML = "";
-
-//     const pageTodos = getPaginatedTodos();
-
-//     mainTable.innerHTML = pageTodos.map((item, i) => `
-//         <tr data-uid="${item.id}">
-//             <td>${(currentPage - 1) * itemsPerPage + i + 1}</td>
-//             <td>${item.title}</td>
-//             <td>${item.description}</td>
-//             <td>${item.location}</td>
-//             <td>${item.email}</td>
-//             <td>${item.status}</td>
-//             <td>${item.category}</td>
-//             <td>${item.priority}</td>
-//             <td>${item.time}</td>
-//             <td class="edit"><i class="fa-solid fa-pen-to-square"></i></td>
-//             <td class="delete"><i class="fa-solid fa-trash-can"></i></td>
-//         </tr>
-//     `).join("");
-// }
-
 function showTable() {
     mainTable.innerHTML = "";
 
@@ -138,50 +111,7 @@ function showTable() {
             <td class="delete"><i class="fa-solid fa-trash-can"></i></td>
         </tr>
     `).join("");
-    // document.querySelector('tr').style.marginBlock="20px"
 }
-
-
-// function showGrid() {
-//     listDiv.innerHTML = "";
-
-//      const pageTodos = getPaginatedTodos();
-
-//     listDiv.innerHTML = pageTodos.map((item, i) => `
-//         <div class="grid-box" data-uid="${item.id}">
-//             <strong>${(currentPage - 1) * itemsPerPage + i + 1}. ${item.title}</strong>
-//             <p>${item.description}</p>
-//             <div class="grid-edit-del-buttons">
-//             <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
-//             <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
-//             </div>
-//         </div>
-//     `).join("");
-// }
-
-// function showGrid() {
-//     listDiv.innerHTML = "";
-
-//     const pageTodos = getPaginatedTodos();
-
-//     if (filteredTodos.length === 0) {
-//         listDiv.innerHTML = `<p><strong>Todos not found for this title</strong></p>`;
-//         return;
-//     }
-
-//     listDiv.innerHTML = pageTodos.map((item, i) => `
-//         <div class="grid-box border" data-uid="${item.id}">
-        
-//             <strong>${(currentPage - 1) * itemsPerPage + i + 1}. ${item.title}</strong>
-//             <p>${item.description}</p>
-//             <div class="grid-edit-del-buttons">
-//                 <div class="edit"><i class="fa-solid fa-pen-to-square"></i></div>
-//                 <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
-//                 <div class="checkbox"><input type="checkbox" name="" id=""></div>
-//             </div>
-//         </div>
-//     `).join("");
-// }
 
 function showGrid() {
     listDiv.innerHTML = "";
@@ -209,51 +139,162 @@ function showGrid() {
     `).join("");
 }
 
+// todo.addEventListener("click", (e) => {
+//     const delBtn = e.target.closest(".delete");
+//     const editBtn = e.target.closest(".edit");
+//      const asendingBtn = e.target.closest(".asending-btn");
+//     const descendingBtn = e.target.closest(".descending-btn");
+
+
+//     if (delBtn) {
+//         // delBtn.closest("[data-uid]").classList.add("del");
+//         document.querySelector('.main-container').classList.toggle("del")
+//         console.log("delete button clicked");
+//     }
+     
+//     if (editBtn) {
+//         const id = editBtn.closest("[data-uid]").dataset.uid;
+//         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;
+//     }
+//     let isAsending=true;
+//     let isDescending=false;
+
+//     if (asendingBtn) {
+//        console.log("asending btn licked");
+//        if(isAsending) return alert("already in asending");
+         
+        
+//        }
+//        if (descendingBtn) {
+//            console.log("descending btn licked");
+//     if(isDescending) return alert("already in descending");
+//     console.log("reverse todos",todos.reverse());
+     
+
+//     }
+// });
+
+
+
 
 todo.addEventListener("click", (e) => {
     const delBtn = e.target.closest(".delete");
     const editBtn = e.target.closest(".edit");
-     const asendingBtn = e.target.closest(".asending-btn");
+    const asendingBtn = e.target.closest(".asending-btn");
     const descendingBtn = e.target.closest(".descending-btn");
 
-
     if (delBtn) {
-        // delBtn.closest("[data-uid]").classList.add("del");
         document.querySelector('.main-container').classList.toggle("del")
         console.log("delete button clicked");
     }
-     
+
     if (editBtn) {
         const id = editBtn.closest("[data-uid]").dataset.uid;
         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;
     }
 
-    if (asendingBtn) {
-       console.log("asending btn licked");
-       
-    }
-    if (descendingBtn) {
-        console.log("descending btn licked");
-    }
-});
+//    if (e.target.closest('thead')) {
 
+//     const th = e.target.closest('th'); // find the heading cell
+//     if (!th) return;
 
-// deletePopup.addEventListener("click", (e) => {
-//     if (e.target.classList.contains("yes")) {
-//         const delItem = document.querySelector(".del");
-//         const id = delItem.dataset.uid;
-         
-//         todos = todos.filter(t => t.id !== id);
-//         filteredTodos = filteredTodos.filter(t => t.id !== id);
+//     // 🔹 remove active class from all headings first
+//     document.querySelectorAll('thead th.active-heading')
+//         .forEach(h => h.classList.remove('active-heading'));
 
-//         localStorage.setItem("myTodoTask", JSON.stringify(todos));
-//         render();
+//     if (th.classList.contains('indexing')) {
+//         console.log("indexing is clicked");
+//         th.classList.add('active-heading');
 //     }
 
-//     if (e.target.classList.contains("no")) {
-//         document.querySelector(".del")?.classList.remove("del");
+//     if (th.classList.contains('title')) {
+//         console.log("title is clicked");
+//         th.classList.add('active-heading');
 //     }
-// });
+
+//     if (th.classList.contains('description')) {
+//         console.log("description is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('location')) {
+//         console.log("location is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('email')) {
+//         console.log("email is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('status')) {
+//         console.log("status is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('category')) {
+//         console.log("category is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('priority')) {
+//         console.log("priority is clicked");
+//         th.classList.add('active-heading');
+//     }
+
+//     if (th.classList.contains('time')) {
+//         console.log("time is clicked");
+//         th.classList.add('active-heading');
+//     }
+// }
+
+if (e.target.closest('thead')) {
+
+    const th = e.target.closest('th');
+    if (!th) return;
+
+    const allHeadings = document.querySelectorAll('thead th');
+
+    // toggle behavior
+    if (th.classList.contains('active-heading')) {
+        th.classList.remove('active-heading');
+    } else {
+        allHeadings.forEach(h => h.classList.remove('active-heading'));
+        th.classList.add('active-heading');
+    }
+
+    // 🔽 CHECK: is any heading active?
+    const hasActiveHeading = document.querySelector('thead th.active-heading');
+
+    if (hasActiveHeading) {
+        // 🔽 DESCENDING
+        console.log("Sorting DESCENDING");
+
+        filteredTodos.sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+            return 0;
+        });
+
+    } else {
+        // 🔼 ASCENDING
+        console.log("Sorting ASCENDING");
+
+        filteredTodos.sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+            return 0;
+        });
+    }
+
+    // reset pagination & re-render
+    currentPage = 1;
+    render();
+}
+
+
+
+   });
 
 
 closeFilterIcon.addEventListener("click", (e) => {
@@ -274,21 +315,6 @@ closeFilterIcon.addEventListener("click", (e) => {
     todo.classList.toggle('filter');
 });
 
-// function handleChange(value) {
-//     value = value.toLowerCase().trim();
-
-//     if (value === "") {
-//         filteredTodos = [...todos];
-//     } else {
-//         filteredTodos = todos.filter(item =>
-//             item.title.toLowerCase().startsWith(value)
-//         );
-//     }
-
-//     currentPage = 1;
-//     render();
-// }
-
 function handleChange(value) {
     value = value.toLowerCase().trim();
 
@@ -307,8 +333,6 @@ function handleChange(value) {
         render();
     }, delay);
 }
-
-
 
 function deleteMultiple() {
     console.log("delete multiple applied");
@@ -346,34 +370,27 @@ function deleteMultiple() {
 
 function showAsenDesBtn() {
     let allHeadings = document.querySelectorAll('th');
+    // for(let x of allHeadings){
+    //     x.style.display="flex"
+    // }
 
-    for (let i = 1; i < allHeadings.length-2; i++) {
+    // for (let i = 1; i < allHeadings.length-2; i++) {
 
-        // prevent multiple inserts
-        if (allHeadings[i].querySelector('.asend-desend-div')) continue;
+    //     // prevent multiple inserts
+    //     if (allHeadings[i].querySelector('.asend-desend-div')) continue;
 
-        allHeadings[i].insertAdjacentHTML(
-            'beforeend',
-            `<div class="asend-desend-div">
-                <button class="descending-btn">▲</button>
-                <button class="asending-btn">▼</button>
-            </div>`
-        );
-    }
+    //     allHeadings[i].insertAdjacentHTML(
+    //         'beforeend',
+    //         `<span class="asend-desend-div">
+    //             <button class="descending-btn"><i class="fa-solid fa-arrow-up"></i></button>
+    //             <button class="asending-btn"><i class="fa-solid fa-arrow-down"></i></button>
+    //         </span>`
+    //     );
+    // }
+
+    
 }
 
-
-// asendingDescendingDiv.addEventListener('click',(e)=>{
-//      const asendingBtn = e.target.closest(".asendingBtn");
-//     const descendingBtn = e.target.closest(".descending-btn");
-
-//     if(asendingBtn){
-//         console.log("asending btn clicked");
-//     }
-//     if(descendingBtn){
-//         console.log("asending btn clicked");
-//     }
-// })
 
 
 
