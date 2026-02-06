@@ -117,7 +117,7 @@ th i {
     font-size: 0.9em;             /* optional: slightly smaller icon */
 }
 
-th .inactive {
+/* th .inactive {
   display: inline-block;
 }
 
@@ -131,8 +131,13 @@ th.active-heading .inactive {
 
 th.active-heading .active {
   display: inline-block;
-}
+} */
 
+
+.sort-icon {
+    margin-left: 6px;
+    font-size: 12px;
+}
 
 
 /* .delete-popup {

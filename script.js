@@ -193,61 +193,6 @@ todo.addEventListener("click", (e) => {
         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;
     }
 
-//    if (e.target.closest('thead')) {
-
-//     const th = e.target.closest('th'); // find the heading cell
-//     if (!th) return;
-
-//     // 🔹 remove active class from all headings first
-//     document.querySelectorAll('thead th.active-heading')
-//         .forEach(h => h.classList.remove('active-heading'));
-
-//     if (th.classList.contains('indexing')) {
-//         console.log("indexing is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('title')) {
-//         console.log("title is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('description')) {
-//         console.log("description is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('location')) {
-//         console.log("location is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('email')) {
-//         console.log("email is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('status')) {
-//         console.log("status is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('category')) {
-//         console.log("category is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('priority')) {
-//         console.log("priority is clicked");
-//         th.classList.add('active-heading');
-//     }
-
-//     if (th.classList.contains('time')) {
-//         console.log("time is clicked");
-//         th.classList.add('active-heading');
-//     }
-// }
-
 if (e.target.closest('thead')) {
 
     const th = e.target.closest('th');
@@ -255,29 +200,31 @@ if (e.target.closest('thead')) {
 
     const allHeadings = document.querySelectorAll('thead th');
 
-    // toggle behavior
-    if (th.classList.contains('active-heading')) {
+    // Find the arrow icon in clicked TH
+    const clickedIcon = th.querySelector('i.fa-arrow-up, i.fa-arrow-down');
+    if (!clickedIcon) return;
+
+    // Reset all other TH arrows to up and remove active-heading
+    allHeadings.forEach(h => {
+        if (h !== th) {
+            h.classList.remove('active-heading');
+            const icon = h.querySelector('i.fa-arrow-up, i.fa-arrow-down');
+            if (icon) {
+                icon.classList.remove('fa-arrow-down');
+                icon.classList.add('fa-arrow-up');
+            }
+        }
+    });
+
+    // Toggle clicked TH
+    const isActive = th.classList.contains('active-heading');
+
+    if (isActive) {
+        // Already active → turn back to ASC
         th.classList.remove('active-heading');
-    } else {
-        allHeadings.forEach(h => h.classList.remove('active-heading'));
-        th.classList.add('active-heading');
-    }
+        clickedIcon.classList.remove('fa-arrow-down');
+        clickedIcon.classList.add('fa-arrow-up');
 
-    // 🔽 CHECK: is any heading active?
-    const hasActiveHeading = document.querySelector('thead th.active-heading');
-
-    if (hasActiveHeading) {
-        // 🔽 DESCENDING
-        console.log("Sorting DESCENDING");
-
-        filteredTodos.sort((a, b) => {
-            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
-            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
-            return 0;
-        });
-
-    } else {
-        // 🔼 ASCENDING
         console.log("Sorting ASCENDING");
 
         filteredTodos.sort((a, b) => {
@@ -285,12 +232,27 @@ if (e.target.closest('thead')) {
             if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
             return 0;
         });
+
+    } else {
+        // Make active → turn arrow down
+        th.classList.add('active-heading');
+        clickedIcon.classList.remove('fa-arrow-up');
+        clickedIcon.classList.add('fa-arrow-down');
+
+        console.log("Sorting DESCENDING");
+
+        filteredTodos.sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+            return 0;
+        });
     }
 
-    // reset pagination & re-render
+    // Reset pagination & re-render
     currentPage = 1;
     render();
 }
+
 
 
 
