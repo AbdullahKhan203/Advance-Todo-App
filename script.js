@@ -51,6 +51,7 @@ function render() {
     updatePaginationUI();
     addStyles();
     // showAsenDesBtn();
+    activateTooltips();
 }
 
 prevBtn.addEventListener("click", () => {
@@ -309,6 +310,13 @@ function deleteMultiple() {
     
 // }
 
+// Activate all Bootstrap 5 tooltips
+function activateTooltips(){
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+}
 
 
 
