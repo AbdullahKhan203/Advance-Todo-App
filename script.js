@@ -50,7 +50,7 @@ function render() {
     showGrid();
     updatePaginationUI();
     addStyles();
-    showAsenDesBtn();
+    // showAsenDesBtn();
 }
 
 prevBtn.addEventListener("click", () => {
@@ -139,43 +139,6 @@ function showGrid() {
     `).join("");
 }
 
-// todo.addEventListener("click", (e) => {
-//     const delBtn = e.target.closest(".delete");
-//     const editBtn = e.target.closest(".edit");
-//      const asendingBtn = e.target.closest(".asending-btn");
-//     const descendingBtn = e.target.closest(".descending-btn");
-
-
-//     if (delBtn) {
-//         // delBtn.closest("[data-uid]").classList.add("del");
-//         document.querySelector('.main-container').classList.toggle("del")
-//         console.log("delete button clicked");
-//     }
-     
-//     if (editBtn) {
-//         const id = editBtn.closest("[data-uid]").dataset.uid;
-//         window.location.href = `GetData.html?id=${encodeURIComponent(id)}`;
-//     }
-//     let isAsending=true;
-//     let isDescending=false;
-
-//     if (asendingBtn) {
-//        console.log("asending btn licked");
-//        if(isAsending) return alert("already in asending");
-         
-        
-//        }
-//        if (descendingBtn) {
-//            console.log("descending btn licked");
-//     if(isDescending) return alert("already in descending");
-//     console.log("reverse todos",todos.reverse());
-     
-
-//     }
-// });
-
-
-
 
 todo.addEventListener("click", (e) => {
     const delBtn = e.target.closest(".delete");
@@ -253,11 +216,7 @@ if (e.target.closest('thead')) {
     render();
 }
 
-
-
-
    });
-
 
 closeFilterIcon.addEventListener("click", (e) => {
      todo.classList.toggle('filter')
@@ -328,10 +287,8 @@ function deleteMultiple() {
     window.location.reload();
 }
 
-
-
-function showAsenDesBtn() {
-    let allHeadings = document.querySelectorAll('th');
+// function showAsenDesBtn() {
+//     let allHeadings = document.querySelectorAll('th');
     // for(let x of allHeadings){
     //     x.style.display="flex"
     // }
@@ -349,9 +306,8 @@ function showAsenDesBtn() {
     //         </span>`
     //     );
     // }
-
     
-}
+// }
 
 
 
