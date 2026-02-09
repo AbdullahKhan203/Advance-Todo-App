@@ -77,7 +77,7 @@ function listGrid() {
 }
 
 function filter() {
-    todo.classList.toggle("filter");
+    // todo.classList.toggle("filter");
 }
 
 function showTable() {

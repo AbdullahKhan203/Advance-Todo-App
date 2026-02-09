@@ -188,7 +188,8 @@ th.active-heading .active {
     right: 10px;
 }
 
-.filter-popup {
+/* filter popup code */
+/* .filter-popup {
     height: 200px;
     width: 300px;
      background-color: rgb(233, 220, 220);
@@ -214,25 +215,23 @@ th.active-heading .active {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* .main-container:has(.filter) > :not(.filter-popup) {
+.main-container:has(.filter) > :not(.filter-popup) {
     pointer-events: none;
 }
 
 .main-container:has(.filter) .todo {
     background-color: rgb(63, 58, 58);
-} */
+}
 
 .main-container:has(.filter) > :not(.filter-popup)
-/* ,.main-container:has(.del) > :not(.delete-popup)  */
 {
     pointer-events: none;
 }
 
 .main-container:has(.filter) .todo
-/* ,.main-container:has(.del) .todo */
  {
     background-color: rgb(63, 58, 58) !important;
-}
+} */
 
 
 table {
