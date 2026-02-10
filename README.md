@@ -1,0 +1,1 @@
+this is a project for learning purpose,in which first i crate a project in html,css and js and make it in vanilla branch,then convert in into react and firebase and with seperate branch react-firebase and convert it into a mern stack with branch mern. 
