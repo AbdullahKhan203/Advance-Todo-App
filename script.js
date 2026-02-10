@@ -270,19 +270,19 @@ if (e.target.closest('.custom-dropdown-div')) {
 //      todo.classList.toggle('filter')
 //     });
 
-    selectStatusFilterOption.addEventListener('change', (event) => {
-    const selectedValue = event.target.value;
+//     selectStatusFilterOption.addEventListener('change', (event) => {
+//     const selectedValue = event.target.value;
 
-    if (selectedValue === "all") {
-        filteredTodos = [...todos];
-    } else {
-        filteredTodos = todos.filter(item => item.status === selectedValue);
-    }
+//     if (selectedValue === "all") {
+//         filteredTodos = [...todos];
+//     } else {
+//         filteredTodos = todos.filter(item => item.status === selectedValue);
+//     }
 
-    currentPage = 1;
-    render();
-    todo.classList.toggle('filter');
-});
+//     currentPage = 1;
+//     render();
+//     todo.classList.toggle('filter');
+// });
 
 function handleChange(value) {
     value = value.toLowerCase().trim();
