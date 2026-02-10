@@ -10,6 +10,9 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const pageInfo = document.getElementById("page-info");
 const rows=document.getElementsByTagName('tr')
+const customDropdownDiv=document.querySelector('.custom-dropdown-div')
+const customDropdownBtn=document.querySelector('.custom-dropdown-btn')
+
 
 
 function addStyles() {
@@ -76,9 +79,15 @@ function listGrid() {
     todo.classList.toggle("grid");
 }
 
-function filter() {
-    // todo.classList.toggle("filter");
-}
+// function filter() {
+//   todo.classList.toggle('dropdown-open')
+
+// }
+
+customDropdownDiv.addEventListener('click',(e)=>{
+   todo.classList.toggle('dropdown-open')
+
+})
 
 function showTable() {
     mainTable.innerHTML = "";
@@ -217,11 +226,49 @@ if (e.target.closest('thead')) {
     render();
 }
 
+
+if (e.target.closest('.custom-dropdown-div')) {
+    console.log("Custom dropdown div is clicked");
+
+    const li = e.target.closest('li');
+    if (!li) return;
+
+    const value = li.dataset.value;
+
+
+
+    if (li.classList.contains('in-progress')) {
+        console.log("In progress filter selected, value:", value);
+    }
+
+    if (li.classList.contains('done')) {
+        console.log("Done filter selected, value:", value);
+    }
+
+    if (li.classList.contains('pending')) {
+        console.log("Pending filter selected, value:", value);
+    }
+
+    if(value=="all"){
+     filteredTodos = [...todos];
+    }else{
+         filteredTodos = todos.filter(item => item.status === value);
+    }
+
+    currentPage = 1;
+    render();
+
+}
+
+
+
+
+
    });
 
-closeFilterIcon.addEventListener("click", (e) => {
-     todo.classList.toggle('filter')
-    });
+// closeFilterIcon.addEventListener("click", (e) => {
+//      todo.classList.toggle('filter')
+//     });
 
     selectStatusFilterOption.addEventListener('change', (event) => {
     const selectedValue = event.target.value;

@@ -98,6 +98,7 @@ tr:hover{
     width: 80%;
     padding-inline: 10px;
 }
+
 /* remove table border */
 table {
   border-collapse: collapse;
@@ -188,51 +189,73 @@ th.active-heading .active {
     right: 10px;
 }
 
-/* filter popup code */
-/* .filter-popup {
-    height: 200px;
-    width: 300px;
-     background-color: rgb(233, 220, 220);
-    border-radius: 5px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translate(50%, -100%) scale(0);
-    transition: 0.5s;
-    padding: 5px;
+.custom-dropdown-div{
+    position: relative;
 }
 
-.close-filter-icon{
+.custom-dropdown-div .fiter-dropdown{
     position: absolute;
-    right: 5px;
-    border: none;
-    background-color: transparent;
+    top: 100%;
+    right: 50%;
+    /* width: 100%; */
+    border: 5%;
 }
 
-.main-container:has(.filter) .filter-popup {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+
+
+.custom-dropdown-div{
+    position: relative;
 }
 
-.main-container:has(.filter) > :not(.filter-popup) {
+.custom-dropdown-div .fiter-dropdown{
+   display: none;
+}
+
+.dropdown-open  .fiter-dropdown{
+   display: inline-block;
+}
+
+.custom-dropdown-div ul {
+    position: absolute;
+    list-style: none;
+    background-color: #ffffff;
+    opacity: 1;
+    border-radius: 5%;
+    border: 1px solid black;
+    z-index: 9999;
+    width: min-content;
+
+    /* 🔥 remove left empty space */
+    padding:0px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.custom-dropdown-div li {
+    text-align: left;           /* bring it above */
+
+}
+
+
+.custom-dropdown-div ul li{
+   white-space: nowrap;
+   padding-inline-start: 4px;
+   padding-inline-end: 4px;
+   
+}
+
+.custom-dropdown-div ul li:hover{
+   background: rgb(231, 189, 189);
+}
+
+.todo.dropdown-open * {
     pointer-events: none;
 }
 
-.main-container:has(.filter) .todo {
-    background-color: rgb(63, 58, 58);
+.todo.dropdown-open .custom-dropdown-div,
+.todo.dropdown-open .custom-dropdown-div * {
+    pointer-events: auto;
 }
-
-.main-container:has(.filter) > :not(.filter-popup)
-{
-    pointer-events: none;
-}
-
-.main-container:has(.filter) .todo
- {
-    background-color: rgb(63, 58, 58) !important;
-} */
-
 
 table {
     display: table;

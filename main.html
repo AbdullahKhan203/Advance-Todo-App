@@ -32,10 +32,18 @@
     <i class="fa-solid fa-table-cells"></i>
 </button>
 
-<button id="filter-button" type="button" class="btn btn-outline-info" 
-    data-bs-toggle="tooltip" data-bs-placement="top" title="filter buttton" onclick="filter()">
-    <i class="fa-solid fa-filter"></i>
-</button>
+<div class="custom-dropdown-div" onclick="filter()">
+  <button  type="button"
+    data-bs-toggle="tooltip" data-bs-placement="top" title="filter btn" class="custom-dropdown-btn btn btn-outline-info"> <i class="fa-solid fa-filter"></i></button>
+  <ul class="fiter-dropdown">
+  <li data-value="all" class="all">All</li>
+  <li data-value="inProgress" class="in-progress">In Progress</li>
+  <li data-value="done" class="done">Done</li>
+  <li data-value="pending" class="pending">Pending</li>
+</ul>
+
+</div>
+
             <button  type="button"
     data-bs-toggle="tooltip" data-bs-placement="top" title="Add new todo" class="btn btn-outline-secondary"  onclick="window.location.href='GetData.html'"><i class="fa-solid fa-plus"></i></button>
             <button type="button" class="btn btn-outline-secondary delete-multiple-btn" onclick="deleteMultiple()"><i class="fa-solid fa-circle-minus"></i></button>
@@ -69,25 +77,6 @@
     <button id="next" type="button" class="btn btn-outline-secondary  d-flex justigy-content-center  align-items-center ms-2"><i class="fa-solid fa-angle-right"></i></button>
        </div>
     </div>
-
-    <!-- <div class="delete-popup">
-        <p>Are you sure, you want to delete?</p>
-        <button class="yes btn btn-sm btn-danger me-2">Yes</button>
-        <button class="no btn btn-sm btn-success">No</button>
-    </div> -->
-    <!-- <div class=" filter-popup">
-        <button class="close-filter-icon"><i class="fa-solid fa-x"></i></button>
-        <label for="status">Select Status</label>
-        <br>
-        <select  class="select-status-filter-options form-select" value="" id="status">
-            <option value="all">All</option>
-            <option value="done">Done</option>
-            <option value="inProgress">InProgress</option>
-            <option value="pending">Pending</option>
-        </select>
-    </div> -->
-
-   
 
 </div>
 
