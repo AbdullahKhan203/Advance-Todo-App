@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiBoxList } from "react-icons/ci";
@@ -14,6 +14,8 @@ import { Button, Alert, Container} from 'react-bootstrap';
 
 
 export default function Table() {
+    
+
   const todos=JSON.parse(localStorage.getItem('myTodoTask'))
   console.log("todos in table page",todos);
   
