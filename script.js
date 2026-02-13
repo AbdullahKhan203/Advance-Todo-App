@@ -13,8 +13,6 @@ const rows=document.getElementsByTagName('tr')
 const customDropdownDiv=document.querySelector('.custom-dropdown-div')
 const customDropdownBtn=document.querySelector('.custom-dropdown-btn')
 
-
-
 function addStyles() {
   for (let i = 1; i < rows.length; i++) {
     if (i % 2 === 0) {
@@ -34,13 +32,13 @@ const delay = 500;
 let currentPage = 1;
 const itemsPerPage = 10;
 
-function getPaginatedTodos() {
+function getPaginatedTodos(){
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     return filteredTodos.slice(start, end);
 }
 
-function updatePaginationUI() {
+function updatePaginationUI(){
     const totalPages = Math.ceil(filteredTodos.length / itemsPerPage) || 1;
     pageInfo.innerHTML = `Page  <span class="current-page-number">${currentPage}</span> of ${totalPages}`;
    
@@ -86,7 +84,6 @@ function listGrid() {
 
 customDropdownDiv.addEventListener('click',(e)=>{
    todo.classList.toggle('dropdown-open')
-
 })
 
 function showTable() {
@@ -227,7 +224,7 @@ if (e.target.closest('thead')) {
 }
 
 
-if (e.target.closest('.custom-dropdown-div')) {
+if(e.target.closest('.custom-dropdown-div')) {
     console.log("Custom dropdown div is clicked");
 
     const li = e.target.closest('li');
@@ -259,11 +256,6 @@ if (e.target.closest('.custom-dropdown-div')) {
     render();
 
 }
-
-
-
-
-
    });
 
 // closeFilterIcon.addEventListener("click", (e) => {
@@ -284,13 +276,13 @@ if (e.target.closest('.custom-dropdown-div')) {
 //     todo.classList.toggle('filter');
 // });
 
-function handleChange(value) {
+function handleChange(value){
     value = value.toLowerCase().trim();
 
     clearTimeout(searchTimer);
 
     searchTimer = setTimeout(() => {
-        if (value === "") {
+        if (value === ""){
             filteredTodos = [...todos];
         } else {
             filteredTodos = todos.filter(item =>
@@ -303,7 +295,7 @@ function handleChange(value) {
     }, delay);
 }
 
-function deleteMultiple() {
+function deleteMultiple(){
     console.log("delete multiple applied");
 
     // Toggle the del class for UI
@@ -315,7 +307,7 @@ function deleteMultiple() {
     let checkedInputfieldsIds = [];
 
     checkboxInputs.forEach(cb => {
-        if (cb.checked) {
+        if (cb.checked){
             const uid = cb.dataset.uid || cb.closest('[data-uid]').dataset.uid;
             checkedInputfieldsIds.push(uid);
         }
