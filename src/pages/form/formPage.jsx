@@ -208,11 +208,14 @@
 
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 export default function FormPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
     description: "",
+    id:"",
     location: "",
     email: "",
     status: "",
@@ -250,6 +253,7 @@ export default function FormPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    data.id=crypto.randomUUID();
     console.log(data);
     todos.push(data);
     localStorage.setItem("myTodoTask", JSON.stringify(todos));
@@ -265,6 +269,8 @@ export default function FormPage() {
       priority: "",
       time: "",
     });
+navigate('/')
+
   };
 
   return (
