@@ -426,7 +426,7 @@ const handleSort = (key) => {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
-  
+
   const nextPage = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
@@ -460,7 +460,7 @@ const handleSort = (key) => {
     setIsMultiDelete(false);
   };
 
-  // Open Edit Modal
+  // Open Edit  Modal
   const handleEditClick = (todo) => {
     setEditingTodo(todo);
     setEditedData({ ...todo }); // copy for editing
