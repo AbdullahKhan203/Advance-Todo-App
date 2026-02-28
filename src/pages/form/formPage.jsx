@@ -200,6 +200,239 @@
 
 
 
+// import React, { useState } from "react";
+// import { Form, Button, Container, Row, Col } from "react-bootstrap";
+// import { useNavigate } from 'react-router-dom';
+
+// import { collection, addDoc } from "firebase/firestore";
+// import { db } from "../../firebase.js";
+
+// export default function FormPage() {
+//   const navigate = useNavigate();
+//   const [data, setData] = useState({
+//     title: "",
+//     description: "",
+//     id:"",
+//     location: "",
+//     email: "",
+//     status: "",
+//     catagory: "",
+//     priority: "",
+//     time: "",
+//   });
+
+//   const statusOptions = [
+//     { value: "pending", label: "Pending" },
+//     { value: "inProgress", label: "In Progress" },
+//     { value: "done", label: "Done" },
+//   ];
+
+//   const catagoryOptions = [
+//     { value: "personal", label: "Personal" },
+//     { value: "delegate", label: "Delegate" },
+//   ];
+
+//   const priorityOptions = [
+//     { value: "low", label: "Low" },
+//     { value: "medium", label: "Medium" },
+//     { value: "high", label: "High" },
+//   ];
+
+//   const handleChange = (event) => {
+//     const { name, value } = event.target;
+//     setData((prevState) => ({
+//       ...prevState,
+//       [name]: value,
+//     }));
+//   };
+
+//   let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
+
+// //   const handleSubmit = (event) => {
+// //     event.preventDefault();
+// //     data.id=crypto.randomUUID();
+// //     console.log(data);
+// //     todos.push(data);
+// //     localStorage.setItem("myTodoTask", JSON.stringify(todos));
+
+// //     // reset state
+// //     setData({
+// //       title: "",
+// //       description: "",
+// //       location: "",
+// //       email: "",
+// //       status: "",
+// //       catagory: "",
+// //       priority: "",
+// //       time: "",
+// //     });
+// // navigate('/')
+// //   };
+
+// const handleSubmit = async (event) => {
+//   event.preventDefault();
+
+//   try {
+//     await addDoc(collection(db, "todos"), {
+//       title: data.title,
+//       description: data.description,
+//       location: data.location,
+//       email: data.email,
+//       status: data.status,
+//       catagory: data.catagory,
+//       priority: data.priority,
+//       time: data.time,
+//       createdAt: new Date()
+//     });
+
+//     alert("Todo saved to Firestore!");
+
+//     // reset form
+//     setData({
+//       title: "",
+//       description: "",
+//       location: "",
+//       email: "",
+//       status: "",
+//       catagory: "",
+//       priority: "",
+//       time: "",
+//     });
+
+//     navigate("/");
+//   } catch (error) {
+//     console.error("Error adding document:", error);
+//   }
+// };
+
+//   return (
+//     <Container fluid className="min-h-full w-full d-flex flex-column align-items-center py-2 bg-[#D3D3D3]">
+//       <h1 className="text-center text-3xl mb-2">Enter Todo Here</h1>
+//       <Form
+//         className="p-4 bg-light rounded-3  w-[90%] shadow-xl"
+//         // style={{ maxWidth: "600px" }}
+//         onSubmit={handleSubmit}
+//       >
+//         <Form.Group className="mb-1" controlId="title">
+//           <Form.Label>Title</Form.Label>
+//           <Form.Control
+//             type="text"
+//             placeholder="Enter title"
+//             name="title"
+//             value={data.title}
+//             onChange={handleChange}
+//             required
+//           />
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="description">
+//           <Form.Label>Description</Form.Label>
+//           <Form.Control
+//             type="text"
+//             placeholder="Enter description"
+//             name="description"
+//             value={data.description}
+//             onChange={handleChange}
+//             required
+//           />
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="location">
+//           <Form.Label>Location</Form.Label>
+//           <Form.Control
+//             type="text"
+//             placeholder="Enter location"
+//             name="location"
+//             value={data.location}
+//             onChange={handleChange}
+//             required
+//           />
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="email">
+//           <Form.Label>Email</Form.Label>
+//           <Form.Control
+//             type="email"
+//             placeholder="Enter email"
+//             name="email"
+//             value={data.email}
+//             onChange={handleChange}
+//             required
+//           />
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="status">
+//           <Form.Label>Status</Form.Label>
+//           <Form.Select
+//             name="status"
+//             value={data.status}
+//             onChange={handleChange}
+//             required
+//           >
+//             <option value="">Select Status</option>
+//             {statusOptions.map((item, i) => (
+//               <option key={i} value={item.value}>
+//                 {item.label}
+//               </option>
+//             ))}
+//           </Form.Select>
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="catagory">
+//           <Form.Label>Category</Form.Label>
+//           <Form.Select
+//             name="catagory"
+//             value={data.catagory}
+//             onChange={handleChange}
+//             required
+//           >
+//             <option value="">Select Category</option>
+//             {catagoryOptions.map((item, i) => (
+//               <option key={i} value={item.value}>
+//                 {item.label}
+//               </option>
+//             ))}
+//           </Form.Select>
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="priority">
+//           <Form.Label>Priority</Form.Label>
+//           <Form.Select
+//             name="priority"
+//             value={data.priority}
+//             onChange={handleChange}
+//             required
+//           >
+//             <option value="">Select Priority</option>
+//             {priorityOptions.map((item, i) => (
+//               <option key={i} value={item.value}>
+//                 {item.label}
+//               </option>
+//             ))}
+//           </Form.Select>
+//         </Form.Group>
+
+//         <Form.Group className="mb-1" controlId="time">
+//           <Form.Label>Time</Form.Label>
+//           <Form.Control
+//             type="time"
+//             name="time"
+//             value={data.time}
+//             onChange={handleChange}
+//             required
+//           />
+//         </Form.Group>
+
+//         <Button variant="success" type="submit" className="w-100">
+//           Save
+//         </Button>
+//       </Form>
+//     </Container>
+//   );
+// }
+
+
+
 
 
 
@@ -209,6 +442,9 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase.js";
 
 export default function FormPage() {
   const navigate = useNavigate();
@@ -251,14 +487,46 @@ export default function FormPage() {
 
   let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    data.id=crypto.randomUUID();
-    console.log(data);
-    todos.push(data);
-    localStorage.setItem("myTodoTask", JSON.stringify(todos));
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     data.id=crypto.randomUUID();
+//     console.log(data);
+//     todos.push(data);
+//     localStorage.setItem("myTodoTask", JSON.stringify(todos));
 
-    // reset state
+//     // reset state
+//     setData({
+//       title: "",
+//       description: "",
+//       location: "",
+//       email: "",
+//       status: "",
+//       catagory: "",
+//       priority: "",
+//       time: "",
+//     });
+// navigate('/')
+//   };
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    await addDoc(collection(db, "todos"), {
+      title: data.title,
+      description: data.description,
+      location: data.location,
+      email: data.email,
+      status: data.status,
+      catagory: data.catagory,
+      priority: data.priority,
+      time: data.time,
+      createdAt: new Date()
+    });
+
+    alert("Todo saved to Firestore!");
+
+    // reset form
     setData({
       title: "",
       description: "",
@@ -269,9 +537,12 @@ export default function FormPage() {
       priority: "",
       time: "",
     });
-navigate('/')
 
-  };
+    navigate("/");
+  } catch (error) {
+    console.error("Error adding document:", error);
+  }
+};
 
   return (
     <Container fluid className="min-h-full w-full d-flex flex-column align-items-center py-2 bg-[#D3D3D3]">
@@ -398,3 +669,9 @@ navigate('/')
     </Container>
   );
 }
+
+
+
+
+
+
