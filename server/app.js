@@ -1,67 +1,34 @@
-// const express = require("express");
-
-// const cors = require("cors");
-// const connectDB = require("./config/connectDB.js");
-// require("dotenv").config();
-
-// const app = express();
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-
-
-// // Test route
-// app.get("/", (req, res) => {
-//   res.send("MERN server is running");
-// });
-
-// // Start server
-// app.listen(5000, () => {
-//   console.log("Server running on port 5000 🚀");
-//   connectDB();
-// });
+import dotenv from "dotenv";
+dotenv.config();
+import express from 'express';
+import connectToDb from './database/db.js'
+import authRoutes from './routes/auth-routes.js'
+import homeRoutes from './routes/home-routes.js'
+import adminRoutes from './routes/admin-routes.js'
+import todoRoutes from './routes/todo-routes.js'
+import dns from 'dns';
+import cors from "cors";
 
 
 
-const mongoose=require('mongoose');
-mongoose.connect('mongodb+srv://hk7485966_db_user:hk7485966_db_user_gmz@cluster0.rrkxqqh.mongodb.net/').then(()=>{
-  console.log("Database connected successfully");
-}).catch(e=>console.log(e))
+// Change DNS
+dns.setServers(["1.1.1.1","8.8.8.8"]); 
+
+connectToDb();
 
 
-const userSchema=new mongoose.Schema({
-  name:String,
-  email:String,
-  age:Number,
-  isActive:Boolean,
-  tags:[String],
-  createdAt: {type:Date,default:Date.now()}
-});
+const app=express();
+app.use(cors());
+const PORT= 4000;
 
 
-// user model
-const User=mongoose.model('User',userSchema)
+// Middleware
+app.use(express.json()); // very important for parsing JSON body
+app.use('/api/auth', authRoutes)
+app.use('/api/home', homeRoutes)
+app.use('/api/admin', adminRoutes)
+app.use('/api/todo', todoRoutes)
 
-
-async function runQueryExample() {
-  try {
-    const newUser=await User.create({
-    name:'Ali',
-     email:'abc@gmail.com',
-     age:'25',
-     isActive:true,
-     tags:['Developer'],
-     })
-
-     console.log("Created new User",newUser);
-     
-  } catch (e) {
-    console.log('Error->',e);
-  }finally{
-    await mongoose.connection.close();
-  }
-  
-}
-
-runQueryExample();
+app.listen(PORT,()=>{
+    console.log(`Server is listening on PORT ${PORT}`);
+})
