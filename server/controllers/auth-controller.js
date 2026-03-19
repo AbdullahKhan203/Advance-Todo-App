@@ -91,7 +91,7 @@ const accessTokens=jwt.sign({
     username:user.username,
     role:user.role
 },process.env.JWT_SECRET_KEY,{
-    expiresIn:'5m'
+    expiresIn:'10m'
 })
 
 

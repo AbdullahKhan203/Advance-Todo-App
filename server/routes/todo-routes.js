@@ -32,30 +32,81 @@ router.post("/create", protect, async (req, res) => {
 });
 
 
+// router.get("/", protect, async (req, res) => {
+//   try {
+//     //  console.log("user: req.user._id",req.user._id);
+     
+//     const todos = await Todo.find({ user: req.user._id });
 
+//     res.status(200).json({
+//       success: true,
+//       count: todos.length,
+//       data: todos
+//     });
+
+//   } catch (error) {
+
+//     res.status(500).json({
+//       message: error.message
+//     });
+
+//   }
+// });
 
 
 router.get("/", protect, async (req, res) => {
   try {
-    //  console.log("user: req.user._id",req.user._id);
-     
-    const todos = await Todo.find({ user: req.user._id });
+    const {
+      search = "",
+      status = "all",
+      page = 1,
+      limit = 10,
+      sortBy = "createdAt",
+      order = "asc"
+    } = req.query;
+
+    // 🧠 Build query object
+    let query = {
+      user: req.user._id
+    };
+
+    // 🔍 Search by title
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
+    }
+
+    // 🎯 Filter by status
+    if (status !== "all") {
+      query.status = status;
+    }
+
+    // 📄 Pagination
+    const skip = (page - 1) * limit;
+
+    // 🔃 Sorting
+    const sortOrder = order === "asc" ? 1 : -1;
+
+    const todos = await Todo.find(query)
+      .sort({ [sortBy]: sortOrder })
+      .skip(skip)
+      .limit(Number(limit));
+
+    const total = await Todo.countDocuments(query);
 
     res.status(200).json({
       success: true,
-      count: todos.length,
-      data: todos
+      data: todos,
+      page: Number(page),
+      totalPages: Math.ceil(total / limit),
+      totalTodos: total
     });
 
   } catch (error) {
-
     res.status(500).json({
       message: error.message
     });
-
   }
 });
-
 
 
 router.get("/:id", protect, async (req, res) => {
@@ -125,8 +176,6 @@ router.put("/:id", protect, async (req, res) => {
   }
 });
 
-
-
 // router.delete("/:id", protect, async (req, res) => {
 //   try {
 //    const todo = await Todo.findOneAndDelete({
@@ -152,7 +201,6 @@ router.put("/:id", protect, async (req, res) => {
 //     });
 //   }
 // });
-
 
 
 router.delete("/", protect, async (req, res) => {

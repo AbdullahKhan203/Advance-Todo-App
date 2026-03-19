@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import api from "../../api/api";
 
 
 export default function FormPage() {
@@ -49,6 +50,22 @@ const handleSubmit = async (event) => {
 
   try {
      console.log("data=>",data);
+      
+    //  api.post('http://localhost:4000/api/todo/create',data)
+
+    const response = await api.post(
+    "http://localhost:4000/api/todo/create",
+    data
+  );
+
+  console.log("todo created successfully:", response.data);
+
+  // localStorage.setItem("token", response.data.accessTokens);
+
+  // console.log("TOKEN SAVED:", localStorage.getItem("token"));
+
+  navigate("/table");
+
     
     // reset form
     setData({
@@ -62,7 +79,7 @@ const handleSubmit = async (event) => {
       time: "",
     });
 
-    navigate("/");
+    navigate("/table");
   } catch (error) {
     console.error("Error adding document:", error);
   }
