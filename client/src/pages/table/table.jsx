@@ -679,6 +679,8 @@ import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
 } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+
 import { MdDeleteOutline } from "react-icons/md";
 import { CiBoxList, CiFilter, CiCircleMinus } from "react-icons/ci";
 import { IoIosAdd } from "react-icons/io";
@@ -687,6 +689,7 @@ import { useNavigate } from "react-router-dom";
 import { IoGridOutline } from "react-icons/io5";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import api from "../../api/api";
+import { toast } from "react-toastify";
 
 export default function Table(){
   const navigate = useNavigate();
@@ -845,9 +848,10 @@ const deleteSelectedTodos = async () => {
     setSelectedTodos([]);
     setIsMultiDelete(false);
     fetchTodos(); // refresh data
-
+   toast.success("todo deleted successfully")
   } catch (error) {
     console.error("Delete error", error);
+    toast.error("failed to delete a todo")
   }
 };
 
@@ -907,6 +911,20 @@ const handleSaveEdit = async () => {
     setShowEditModal(false);
     setEditingTodo(null);
   };
+
+
+  const handleLogout=()=>{
+    try {
+      localStorage.removeItem('token')
+      
+      toast.success("logout successfully")   
+      setTimeout(()=>{
+        window.location.reload();
+      },1000)
+    } catch (error) {
+      toast.error("logout failed")   
+    }
+  }
 
   return (
     <Container
@@ -1251,12 +1269,16 @@ const handleSaveEdit = async () => {
         )}
 
         {/* Pagination */}
-        <div className="flex justify-end mt-3 items-center gap-2">
+        <div className="flex justify-between mt-3 items-center gap-2">
+          <Button variant="outline-danger" onClick={handleLogout}>
+            <CiLogout />
+          </Button>
+         <div className="flex">
           <Button variant="outline-info" onClick={prevPage}>
             <FaAngleDoubleLeft />
           </Button>
 
-          <div>
+          <div className="px-1">
             {/* Page <b>{currentPage}</b> of <b>{totalPages}</b> */}
             Page {currentPage} of {totalPages}
           </div>
@@ -1265,6 +1287,8 @@ const handleSaveEdit = async () => {
             <FaAngleDoubleRight />
           </Button>
         </div>
+        </div>
+
       </div>
 
       {/* Edit Modal */}

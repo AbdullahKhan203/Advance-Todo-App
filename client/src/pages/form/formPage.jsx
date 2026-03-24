@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import api from "../../api/api";
+import { toast } from "react-toastify";
 
 
 export default function FormPage() {
@@ -59,7 +60,7 @@ const handleSubmit = async (event) => {
   );
 
   console.log("todo created successfully:", response.data);
-
+ toast.success(response.data.success && "todo created successfully");
   // localStorage.setItem("token", response.data.accessTokens);
 
   // console.log("TOKEN SAVED:", localStorage.getItem("token"));
@@ -81,7 +82,8 @@ const handleSubmit = async (event) => {
 
     navigate("/table");
   } catch (error) {
-    console.error("Error adding document:", error);
+    toast.error("failed to add a todo");
+    console.error("Error adding documents:", error);
   }
 };
 

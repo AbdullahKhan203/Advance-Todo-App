@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import api from '../../api/api';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Register() {
     const navigate=useNavigate()
@@ -28,15 +29,23 @@ export default function Register() {
         if(!data.username || !data.email || !data.password ){
             return alert("all fields are required");
         }
+        if(data.username.length<6){
+            return toast.error("username length must be atleast 6 characters long");
+        }
+        if(data.password.length<6){
+            return toast.error("password length must be atleast 6 characters long");
+        }
       console.log("data",data);
 
       try {
         const response=await axios.post("http://localhost:4000/api/auth/register",data);
         console.log(response.data);
         console.log("status",response.status);
+        toast.success(response.data.message);
         navigate("/table");
       } catch (error) {
         console.log("error",error.response?.data || error.message);
+      toast.error(error.response?.data || error.message);
       }
 
 //      try {

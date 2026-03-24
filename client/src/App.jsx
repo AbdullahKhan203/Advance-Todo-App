@@ -9,35 +9,15 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 // import { db } from "./../src/firebase.js";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   // console.log("db in app.js",db);
   
   return (
     <>
-    {/* <Table /> */}
-    {/* <Form /> */}
-    {/* <Routes>
-      <Route path="/" element={<Table />} />
-      <Route path="/formPage" element={<Form />} />
-
-      <Route path="/register" element={<Register />} /> 
-      <Route path="/login" element={<Login />} /> 
-    </Routes> */}
-
-
-        {/* public route */}
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} /> */}
-
-        {/* protected routes */}
-        {/* <Route element={<ProtectedRoute />}>
-
-          <Route path="/table" element={<Table />} />
-          <Route path="/form" element={<Form />} />
-
-        </Route> */}
-
         <Routes>
 
         {/* Public Routes */}
@@ -60,6 +40,12 @@ function App() {
 
           <Route path="*" element={<NotFound />} />
       </Routes>
+
+        <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+      />
+
 
 
     </>

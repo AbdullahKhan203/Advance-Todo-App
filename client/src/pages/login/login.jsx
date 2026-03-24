@@ -2,6 +2,10 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from "react";
 import api from '../../api/api';
+import { toast } from "react-toastify";
+
+
+
 
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
@@ -45,6 +49,7 @@ export default function Login() {
   );
 
   console.log("LOGIN RESPONSE:", response.data);
+   toast.success(response.data.message);
 
   localStorage.setItem("token", response.data.accessTokens);
 
@@ -54,6 +59,7 @@ export default function Login() {
 
 } catch (error) {
   console.log(error.response?.data?.message);
+  toast.error(error.response?.data?.message);
 }
       
    setData({

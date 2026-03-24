@@ -21,7 +21,6 @@ const app=express();
 app.use(cors());
 const PORT= 4000;
 
-
 // Middleware
 app.use(express.json()); // very important for parsing JSON body
 app.use('/api/auth', authRoutes)
@@ -32,3 +31,4 @@ app.use('/api/todo', todoRoutes)
 app.listen(PORT,()=>{
     console.log(`Server is listening on PORT ${PORT}`);
 })
+
