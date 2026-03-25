@@ -32,7 +32,7 @@ function App() {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
 
-          <Route path="/table" element={<Table />} />
+          <Route path="/" element={<Table />} />
           <Route path="/form" element={<Form />} />
 
         </Route>

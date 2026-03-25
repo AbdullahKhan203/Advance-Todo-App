@@ -11,6 +11,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 export default function Login() {
   const navigate=useNavigate()
+  const [loading, setLoading] = useState(false);
     const [data,setData]=useState({
         username:"",
         password:"",
@@ -22,7 +23,7 @@ export default function Login() {
   const token = localStorage.getItem("token");
 
   if (token) {
-    navigate("/table");
+    navigate("/");
   }
 
 }, []);
@@ -43,6 +44,7 @@ export default function Login() {
       console.log("data",data);
 
       try {
+        setLoading(true); 
   const response = await api.post(
     "/auth/login",
     data
@@ -55,12 +57,15 @@ export default function Login() {
 
   console.log("TOKEN SAVED:", localStorage.getItem("token"));
 
-  navigate("/table");
+  navigate("/");
 
 } catch (error) {
   console.log(error.response?.data?.message);
   toast.error(error.response?.data?.message);
-}
+} finally {
+        setLoading(false); // ✅ stop loader
+      }
+
       
    setData({
         username:"",
@@ -85,7 +90,7 @@ export default function Login() {
                  <label htmlFor="password">Password</label>
             <input className='border-1 rounded  px-2 outline-none' type="password" name="password" id="password"  value={data.password} onChange={handleChange}  placeholder='password'/>
             </div>
-            <button className='bg-green-500 rounded w-full'>Login</button>
+            <button className='bg-green-500 rounded w-full' disabled={loading}>  {loading ? "Logging..." : "Login"} </button>
         <span className='self-start'>Not have an account <b onClick={()=>navigate('/register')} className='underline text-blue-500  cursor-pointer'>register</b></span>
         </form>
         </div>

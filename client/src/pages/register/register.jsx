@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 export default function Register() {
     const navigate=useNavigate()
+    const [loading, setLoading] = useState(false);
     const [data,setData]=useState({
         username:"",
         email:"",
@@ -38,40 +39,29 @@ export default function Register() {
       console.log("data",data);
 
       try {
+        setLoading(true); 
+
         const response=await axios.post("http://localhost:4000/api/auth/register",data);
         console.log(response.data);
         console.log("status",response.status);
         toast.success(response.data.message);
-        navigate("/table");
+        navigate("/");
       } catch (error) {
         console.log("error",error.response?.data || error.message);
       toast.error(error.response?.data || error.message);
+      } finally {
+        setLoading(false); // ✅ stop loader
       }
 
-//      try {
 
-//        const res = await api.post("/auth/register",data);
-    
-//     //  localStorage.setItem("token",res.data);
-//         localStorage.setItem("token",res.data.accessTokens);
-        
-
-//     console.log(response.data);
-//     console.log(response.status);
-//      navigate("/table");
-
-//   } catch (error) {
-//     console.log(error.response?.data || error.message);
-//     console.log(error.message.status);
-//   }
-      
    setData({
         username:"",
         email:"",
         password:"",
     });
     }
-  return (
+ 
+    return (
     <div className='h-[100vh] w-full flex flex-col items-center justify-center'>
         <div className='flex flex-col gap-0.5 w-[90%] shadow-lg rounded'>
         <h1 className='text-center  m-0'>Register</h1>
@@ -88,7 +78,7 @@ export default function Register() {
                  <label htmlFor="password">Password</label>
             <input className='border-1 rounded  px-2 outline-none' type="password" name="password" id="password"  value={data.password} onChange={handleChange}  placeholder='password'/>
             </div>
-            <button className='bg-green-500 rounded w-full'>Register</button>
+            <button className='bg-green-500 rounded w-full' disabled={loading}>{loading ? "Registering..." : "Register"} </button>
             <span className='self-start'>Already have an account <b onClick={()=>navigate('/login')} className='underline text-blue-500  cursor-pointer'>login</b></span>
        
         </form>

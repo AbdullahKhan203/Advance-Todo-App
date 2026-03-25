@@ -65,7 +65,7 @@ const handleSubmit = async (event) => {
 
   // console.log("TOKEN SAVED:", localStorage.getItem("token"));
 
-  navigate("/table");
+  navigate("/");
 
     
     // reset form

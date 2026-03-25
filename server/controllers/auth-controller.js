@@ -58,8 +58,6 @@ const registerUser=async(req,res)=>{
 
 
 
-
-
 // login controller
 const loginUser=async(req,res)=>{
     //   res.status(200).json({
@@ -111,5 +109,7 @@ res.status(200).json({
         
     }
 }
+
+
 
 export { registerUser, loginUser };

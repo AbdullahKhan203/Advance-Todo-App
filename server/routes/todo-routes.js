@@ -138,8 +138,6 @@ router.get("/:id", protect, async (req, res) => {
   }
 });
 
-
-
 router.put("/:id", protect, async (req, res) => {
   try {
 
