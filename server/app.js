@@ -6,6 +6,7 @@ import authRoutes from './routes/auth-routes.js'
 import homeRoutes from './routes/home-routes.js'
 import adminRoutes from './routes/admin-routes.js'
 import todoRoutes from './routes/todo-routes.js'
+import { errorMiddleware } from "./middleware/error-middleware.js";
 import dns from 'dns';
 import cors from "cors";
 
@@ -27,6 +28,8 @@ app.use('/api/auth', authRoutes)
 app.use('/api/home', homeRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/todo', todoRoutes)
+
+app.use(errorMiddleware);
 
 app.listen(PORT,()=>{
     console.log(`Server is listening on PORT ${PORT}`);

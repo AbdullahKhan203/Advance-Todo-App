@@ -80,7 +80,7 @@ const handleSubmit = async (event) => {
       time: "",
     });
 
-    navigate("/table");
+    // navigate("/table");
   } catch (error) {
     toast.error("failed to add a todo");
     console.error("Error adding documents:", error);
