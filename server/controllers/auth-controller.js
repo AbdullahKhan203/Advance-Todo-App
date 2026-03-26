@@ -62,7 +62,6 @@ import { asyncHandler } from "../utills/asyncHandler.js";
 const registerUser = asyncHandler(async (req, res) => {
   
   const { username, email, password, role } = req.body;
-
   
   const checkExistingUser = await User.findOne({
     $or: [{ username }, { email }],
