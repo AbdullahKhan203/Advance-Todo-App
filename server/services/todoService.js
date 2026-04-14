@@ -74,8 +74,7 @@ const getSingleTodoService=async({userId,todoId})=>{
 const createTodoService=async(userData)=>{
       const todo = await Todo.create(userData);
      
-
-      return {
+     return {
         data:todo
       }
 }

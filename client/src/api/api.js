@@ -28,7 +28,7 @@ const api = axios.create({
   baseURL: "http://localhost:4000/api"
 });
 
-// REQUEST INTERCEPTOR
+// Request interceptor runs before every request
 api.interceptors.request.use((config) => {
 
   const token = localStorage.getItem("token");
@@ -40,8 +40,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-
-// RESPONSE INTERCEPTOR
+// Response interceptor runs after every response
 api.interceptors.response.use(
 
   (response) => {
@@ -63,4 +62,6 @@ api.interceptors.response.use(
 
 );
 
+
 export default api;
+

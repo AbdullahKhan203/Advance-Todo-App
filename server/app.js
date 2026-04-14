@@ -10,8 +10,6 @@ import { errorMiddleware } from "./middleware/error-middleware.js";
 import dns from 'dns';
 import cors from "cors";
 
-
-
 // Change DNS
 dns.setServers(["1.1.1.1","8.8.8.8"]); 
 

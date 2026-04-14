@@ -12,7 +12,6 @@ import PublicRoute from "./components/PublicRoute.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function App() {
   // console.log("db in app.js",db);
   
@@ -27,7 +26,6 @@ function App() {
           <Route path="/register" element={<Register />} />
 
         </Route>
-
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>

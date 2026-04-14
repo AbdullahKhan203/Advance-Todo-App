@@ -1,68 +1,55 @@
-import React from 'react'
-import { useState } from 'react';
-import axios from 'axios';
-import api from '../../api/api';
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../features/auth/authThunk.js";
 
 export default function Register() {
-    const navigate=useNavigate()
-    const [loading, setLoading] = useState(false);
-    const [data,setData]=useState({
-        username:"",
-        email:"",
-        password:"",
-    })
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-    const element = e.target.name;
-    const value = e.target.value;
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setData((prev) => ({
-        ...prev,
-        [element]: value
+      ...prev,
+      [name]: value
     }));
-};
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit=async(e)=>{
-        e.preventDefault();
-        if(!data.username || !data.email || !data.password ){
-            return alert("all fields are required");
-        }
-        if(data.username.length<6){
-            return toast.error("username length must be atleast 6 characters long");
-        }
-        if(data.password.length<6){
-            return toast.error("password length must be atleast 6 characters long");
-        }
-      console.log("data",data);
+    const result = await dispatch(registerUser(data));
 
-      try {
-        setLoading(true); 
-
-        const response=await axios.post("http://localhost:4000/api/auth/register",data);
-        console.log(response.data);
-        console.log("status",response.status);
-        toast.success(response.data.message);
-        navigate("/");
-      } catch (error) {
-        console.log("error",error.response?.data || error.message);
-      toast.error(error.response?.data || error.message);
-      } finally {
-        setLoading(false); // ✅ stop loader
-      }
-
-
-   setData({
-        username:"",
-        email:"",
-        password:"",
-    });
+    if (registerUser.fulfilled.match(result)) {
+      toast.success(result.payload.message);
+      navigate("/login");
+    } else {
+      toast.error(
+        typeof result.payload === "string"
+          ? result.payload.replace(/"/g, "")
+          : "Register failed"
+      );
     }
- 
-    return (
-    <div className='h-[100vh] w-full flex flex-col items-center justify-center'>
+
+    setData({
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
+
+  return (
+        <div className='h-[100vh] w-full flex flex-col items-center justify-center'>
         <div className='flex flex-col gap-0.5 w-[90%] shadow-lg rounded'>
         <h1 className='text-center  m-0'>Register</h1>
         <form className='flex flex-col items-center p-4 w-full rounded m-0' onSubmit={handleSubmit} >
@@ -84,5 +71,5 @@ export default function Register() {
         </form>
         </div>
     </div>
-  )
+  );
 }

@@ -3,9 +3,14 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import api from "../../api/api";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { createTodo } from "../../features/todo/todoThunk";
 
 
 export default function FormPage() {
+  const dispatch = useDispatch();
+const { loading } = useSelector((state) => state.todos);
+
   const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
@@ -49,26 +54,12 @@ export default function FormPage() {
 const handleSubmit = async (event) => {
   event.preventDefault();
 
-  try {
-     console.log("data=>",data);
-      
-    //  api.post('http://localhost:4000/api/todo/create',data)
+  const result = await dispatch(createTodo(data));
 
-    const response = await api.post(
-    "http://localhost:4000/api/todo/create",
-    data
-  );
+  if (createTodo.fulfilled.match(result)){
+    toast.success("Todo created successfully");
+    navigate("/");
 
-  console.log("todo created successfully:", response.data);
- toast.success(response.data.success && "todo created successfully");
-  // localStorage.setItem("token", response.data.accessTokens);
-
-  // console.log("TOKEN SAVED:", localStorage.getItem("token"));
-
-  navigate("/");
-
-    
-    // reset form
     setData({
       title: "",
       description: "",
@@ -80,10 +71,8 @@ const handleSubmit = async (event) => {
       time: "",
     });
 
-    // navigate("/table");
-  } catch (error) {
-    toast.error("failed to add a todo");
-    console.error("Error adding documents:", error);
+  } else {
+    toast.error(result.payload || "Failed to add todo");
   }
 };
 

@@ -3,12 +3,40 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { asyncHandler } from "../utills/asyncHandler.js";
 import { loginUserService,registerUserService } from '../services/authService.js'; 
+import Joi from 'joi'
+import {validateSignup} from '../validator.js'
 
 // const {registerUserService,login}=authServices
 
+
+
 const registerUser = asyncHandler(async (req, res) => {
+ const { error, value } = validateSignup(req.body);
+
+if (error) {
+  const err = new Error(error.details[0].message);
+  err.statusCode = 400;
+  throw err;
+}
+
   
   const { username, email, password, role } = req.body;
+
+  // if(username.length<3){
+  //   let error=new Error("username must be atleast 3 characters long")
+  //   error.statusCode=200;
+  //   throw error;
+  // }
+
+  // if(email.length==null){
+  //   let error=new Error("")
+  // }
+
+  // if(password.length<6){
+  //    let error=new Error("password must be atleast 6 characters long")
+  //   error.statusCode=200;
+  //   throw error;
+  // }
   
    const result = await registerUserService({
     username,
