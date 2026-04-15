@@ -9,7 +9,7 @@ export const errorMiddleware = (err, req, res, next) => {
     message = "Token expired";
   }
 
-  if (err.name === "JsonWebTokenError") {
+  if (err.name === "JsonWebTokenError"){
     statusCode = 401;
     message = "Invalid token";
   }
