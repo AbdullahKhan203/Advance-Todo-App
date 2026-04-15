@@ -30,7 +30,6 @@ const updateTodo=asyncHandler(async(req,res)=>{
       data: result.data,
       message:result.message
     });
-
   
 })
 

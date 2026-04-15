@@ -21,11 +21,13 @@ import { fetchTodos, deleteTodos, updateTodo } from "../../features/todo/todoThu
 export default function Table(){
   const navigate = useNavigate();
   const itemsPerPage = 10;
+  
 
   // const [todos, setTodos] = useState([])
  
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm2, setSearchTerm2] = useState("");
   const [isGridView, setIsGridView] = useState(false);
 
   // filter states
@@ -46,6 +48,13 @@ const [sortConfig, setSortConfig] = useState({
   key: null,
   direction: "asc",
 });
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setSearchTerm2(searchTerm);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, [searchTerm]);
 
  const dispatch = useDispatch();
 const { todos, totalPages, loading } = useSelector((state) => state.todos);
@@ -53,14 +62,14 @@ const { todos, totalPages, loading } = useSelector((state) => state.todos);
 useEffect(() => {
   // fetchTodos();
    dispatch(fetchTodos({
-    search: searchTerm,
+    search: searchTerm2,
     status: selectedStatus,
     page: currentPage,
     limit: itemsPerPage,
     sortBy: sortConfig.key || "createdAt",
     order: sortConfig.direction
   }));
-}, [searchTerm, selectedStatus, currentPage, sortConfig,dispatch]);
+}, [searchTerm2, selectedStatus, currentPage, sortConfig,dispatch]);
 
 const handleSort = (key) => {
   setSortConfig((prev) => {

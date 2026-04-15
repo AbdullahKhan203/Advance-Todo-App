@@ -9,7 +9,6 @@ email,
 password,
 role
 })=>{
-
   const checkExistingUser = await User.findOne({
     $or: [{ username }, { email }],
   });
@@ -21,6 +20,7 @@ role
     error.statusCode = 400;
     throw error; 
   }
+
 
   
   const salt = await bcrypt.genSalt(10);
@@ -55,8 +55,6 @@ role
 
 }
 
-
-
 const loginUserService=async({
 username,
 password,
@@ -83,7 +81,7 @@ const accessTokens=jwt.sign({
     username:user.username,
     role:user.role
 },process.env.JWT_SECRET_KEY,{
-    expiresIn:'10m'
+    expiresIn:'2m'
 })
 
 

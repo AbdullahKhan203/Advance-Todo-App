@@ -23,6 +23,7 @@
 
 
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api"
@@ -47,18 +48,26 @@ api.interceptors.response.use(
     return response;
   },
 
-  (error) => {
+(error) => {
+  console.log("Interceptor error:", error);
 
-    if (error.response && error.response.status === 401) {
-
-      // token expired or invalid
-      localStorage.removeItem("token");
-
-      window.location.href = "/login";
-    }
-
-    return Promise.reject(error);
+  if (error.response) {
+    console.log("Status:", error.response.status);
   }
+
+  if (error.response && error.response.status === 401) {
+    toast.error("Jwt token expired,need login to continue");
+    
+    setTimeout(()=>{
+    localStorage.removeItem("token");
+      window.location.href = "/login";
+      console.log("jwt expired");
+    },2000)
+    
+  }
+
+  return Promise.reject(error);
+}
 
 );
 
