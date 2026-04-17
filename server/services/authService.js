@@ -58,6 +58,7 @@ role
 const loginUserService=async({
 username,
 password,
+res
 })=>{
 
    const user=await User.findOne({username});
@@ -81,14 +82,22 @@ const accessTokens=jwt.sign({
     username:user.username,
     role:user.role
 },process.env.JWT_SECRET_KEY,{
-    expiresIn:'2m'
+    expiresIn:'1m'
 })
 
+// refresh token
+const refreshToken = jwt.sign(
+  { userId: user._id },
+  process.env.JWT_REFRESH_KEY,
+  { expiresIn: '7d' }
+);
 
-  // ✅ RETURN instead of res
+
+ 
   return {
     message: "Logged in successfully",
     accessTokens,
+    refreshToken
   };
 }
 

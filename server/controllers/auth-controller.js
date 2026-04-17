@@ -1,10 +1,10 @@
 import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 import { asyncHandler } from "../utills/asyncHandler.js";
 import { loginUserService,registerUserService } from '../services/authService.js'; 
 import Joi from 'joi'
 import {validateSignup} from '../validator.js'
+import jwt from "jsonwebtoken";
 
 // const {registerUserService,login}=authServices
 
@@ -93,53 +93,80 @@ if (error) {
 
 
 
-const loginUser=asyncHandler(async (req,res)=>{
-        const {username,password}=req.body;
+// const loginUser=asyncHandler(async (req,res)=>{
+//         const {username,password}=req.body;
 
-const result=await loginUserService({username,password});
-
-
-res.status(200).json({
-    success:true,
-    message:result.message,
-    accessTokens:result.accessTokens
-})
-
-        
-    //    chekc if user exist in database or not
-//     const user=await User.findOne({username});
-//     if(!user){
-//        let error=new Error("User doesn't exsit")
-//        error.statusCode=400
-//        throw error;
-//     }
-   
-//    const isPasswordMatch=await bcrypt.compare(password,user.password)
-
-//    if(!isPasswordMatch){
-//     let error=new Error("Invalid credentials")
-//     error.statusCode=400
-//     throw error
-//    }
-
-// //    create user tokens
-// const accessTokens=jwt.sign({
-//     userId:user._id,
-//     username:user.username,
-//     role:user.role
-// },process.env.JWT_SECRET_KEY,{
-//     expiresIn:'10m'
-// })
+// const result=await loginUserService({username,password,res});
 
 
 // res.status(200).json({
 //     success:true,
-//     message:"Logged in successfully",
-//     accessTokens
+//     message:result.message,
+//     accessTokens:result.accessTokens,
+//     refreshToken:result.refreshToken
 // })
 
+// });
+
+
+const loginUser = asyncHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  const result = await loginUserService({ username, password });
+
+  // ✅ YAHI PAR SET HOTI HAI COOKIE (IMPORTANT)
+  res.cookie("refreshToken", result.refreshToken, {
+    httpOnly: true,
+    secure: false,   // production me true
+    sameSite: "lax", // strict ki jagah lax better hota hai dev me
+  });
+
+  res.status(200).json({
+    success: true,
+    message: result.message,
+    accessTokens: result.accessTokens,
+  });
+});
+
+
+const refreshToken = asyncHandler(async (req, res) => {
+  try {
+    const token = req.cookies.refreshToken;
+     
+    console.log("cookies:", req.cookies);
+    console.log("refreshToken:", req.cookies.refreshToken);
+    console.log("Using secret:", process.env.JWT_REFRESH_KEY);
+
+    if (!token) {
+      const error = new Error("No refresh token found");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    // verify refresh token
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_KEY);
+
+    // create new access token
+    const newAccessToken = jwt.sign(
+      {
+        userId: decoded.userId,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "10m" }
+    );
+
+    res.status(200).json({
+      success: true,
+      accessToken: newAccessToken,
+    });
+
+  } catch (error) {
+    const err = new Error("Invalid or expired refresh token");
+    err.statusCode = 401;
+    throw err;
+  }
 });
 
 
 
-export { registerUser, loginUser };
+export { registerUser, loginUser, refreshToken };

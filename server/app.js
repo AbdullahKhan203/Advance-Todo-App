@@ -9,6 +9,7 @@ import todoRoutes from './routes/todo-routes.js'
 import { errorMiddleware } from "./middleware/error-middleware.js";
 import dns from 'dns';
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 // Change DNS
 dns.setServers(["1.1.1.1","8.8.8.8"]); 
@@ -17,7 +18,15 @@ connectToDb();
 
 
 const app=express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your frontend URL
+    credentials: true,
+  }));
+
+app.use(cookieParser());  
+
 const PORT= 4000;
 
 // Middleware
