@@ -257,6 +257,10 @@ const handleSaveEdit = async () => {
         </div>
 
         {/* Table View */}
+        {/* laader start */}
+        {loading ? <p>"Loading"</p>
+        :
+         <>
         {!isGridView ? (
           <div className="overflow-x-auto mt-2">
             <table className="w-full rounded-2xl">
@@ -519,6 +523,10 @@ const handleSaveEdit = async () => {
             ))}
           </div>
         )}
+</>
+
+        }
+        {/* loader end */}
 
         {/* Pagination */}
         <div className="flex justify-between mt-3 items-center gap-2">
