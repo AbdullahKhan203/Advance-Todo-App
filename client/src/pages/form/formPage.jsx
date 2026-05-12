@@ -1,235 +1,3 @@
-// import React, { useState } from "react";
-// import { Form, Button, Container, Row, Col } from "react-bootstrap";
-// import { useNavigate } from 'react-router-dom';
-// import api from "../../api/api";
-// import { toast } from "react-toastify";
-// import { useDispatch, useSelector } from "react-redux";
-// import { createTodo } from "../../features/todo/todoThunk";
-
-
-// export default function FormPage() {
-//   const dispatch = useDispatch();
-// const { loading } = useSelector((state) => state.todos);
-
-//   const navigate = useNavigate();
-//   const [data, setData] = useState({
-//     title: "",
-//     description: "",
-//     id:"",
-//     location: "",
-//     email: "",
-//     status: "",
-//     catagory: "",
-//     priority: "",
-//     time: "",
-//   });
-
-//   const statusOptions = [
-//     { value: "pending", label: "Pending" },
-//     { value: "inProgress", label: "In Progress" },
-//     { value: "done", label: "Done" },
-//   ];
-
-//   const catagoryOptions = [
-//     { value: "personal", label: "Personal" },
-//     { value: "delegate", label: "Delegate" },
-//   ];
-
-//   const priorityOptions = [
-//     { value: "low", label: "Low" },
-//     { value: "medium", label: "Medium" },
-//     { value: "high", label: "High" },
-//   ];
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-//     setData((prevState) => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
-
-//   // let todos = JSON.parse(localStorage.getItem("myTodoTask")) || [];
-
-// const handleSubmit = async (event) => {
-//   event.preventDefault();
-
-//   const result = await dispatch(createTodo(data));
-
-//   if (createTodo.fulfilled.match(result)){
-//     toast.success("Todo created successfully");
-//     navigate("/");
-
-//     setData({
-//       title: "",
-//       description: "",
-//       location: "",
-//       email: "",
-//       status: "",
-//       catagory: "",
-//       priority: "",
-//       time: "",
-//     });
-
-//   } else {
-//     toast.error(result.payload || "Failed to add todo");
-//   }
-// };
-
-//   return (
-//     <Container fluid className="min-h-full w-full d-flex flex-column align-items-center py-2 bg-[#D3D3D3]">
-//       <h1 className="text-center text-3xl mb-2">Enter Todo Here</h1>
-//       <Form
-//         className="p-4 bg-light rounded-3  w-[90%] shadow-xl"
-//         // style={{ maxWidth: "600px" }}
-//         onSubmit={handleSubmit}
-//       >
-//         <Form.Group className="mb-1" controlId="title">
-//           <Form.Label>Title</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Enter title"
-//             name="title"
-//             value={data.title}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="description">
-//           <Form.Label>Description</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Enter description"
-//             name="description"
-//             value={data.description}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="location">
-//           <Form.Label>Location</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Enter location"
-//             name="location"
-//             value={data.location}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="email">
-//           <Form.Label>Email</Form.Label>
-//           <Form.Control
-//             type="email"
-//             placeholder="Enter email"
-//             name="email"
-//             value={data.email}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="status">
-//           <Form.Label>Status</Form.Label>
-//           <Form.Select
-//             name="status"
-//             value={data.status}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Status</option>
-//             {statusOptions.map((item, i) => (
-//               <option key={i} value={item.value}>
-//                 {item.label}
-//               </option>
-//             ))}
-//           </Form.Select>
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="catagory">
-//           <Form.Label>Category</Form.Label>
-//           <Form.Select
-//             name="catagory"
-//             value={data.catagory}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Category</option>
-//             {catagoryOptions.map((item, i) => (
-//               <option key={i} value={item.value}>
-//                 {item.label}
-//               </option>
-//             ))}
-//           </Form.Select>
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="priority">
-//           <Form.Label>Priority</Form.Label>
-//           <Form.Select
-//             name="priority"
-//             value={data.priority}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Priority</option>
-//             {priorityOptions.map((item, i) => (
-//               <option key={i} value={item.value}>
-//                 {item.label}
-//               </option>
-//             ))}
-//           </Form.Select>
-//         </Form.Group>
-
-//         <Form.Group className="mb-1" controlId="time">
-//           <Form.Label>Time</Form.Label>
-//           <Form.Control
-//             type="time"
-//             name="time"
-//             value={data.time}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-
-//         <Button variant="success" type="submit" className="w-100">
-//           Save
-//         </Button>
-//       </Form>
-//     </Container>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from "react"; 
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
@@ -237,7 +5,7 @@ import api from "../../api/api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createTodo } from "../../features/todo/todoThunk";
-import * as Yup from "yup"; // ✅ added
+import * as Yup from "yup"; 
 
 export default function FormPage() {
   const dispatch = useDispatch();
@@ -351,6 +119,66 @@ export default function FormPage() {
     }
   };
 
+
+const handleSaveClose = async () => {
+  const ok = await saveTodo();
+  if (ok) {
+    navigate("/");
+  }
+};
+
+const handleSaveStay = async () => {
+  const ok = await saveTodo();
+    if (ok) {
+    toast.success("Saved (staying on form)");
+  }
+};
+
+const handleSaveNext = async () => {
+  const ok = await saveTodo();
+  if (ok) {
+    setData({
+      title: "",
+      description: "",
+      location: "",
+      email: "",
+      status: "",
+      catagory: "",
+      priority: "",
+      time: "",
+    });
+  }
+};
+
+
+const saveTodo = async () => {
+  try {
+    const result = await dispatch(createTodo(data));
+
+    if (createTodo.fulfilled.match(result)) {
+      toast.success("Todo created successfully");
+      return true;
+    } else {
+      toast.error(result.payload || "Failed to add todo");
+      return false;
+    }
+  } catch (err) {
+    toast.error("Something went wrong");
+    return false;
+  }
+};
+
+
+const handleWatchTable=()=>{
+   try {
+    navigate("/");
+  } catch (err) {
+    toast.error("Faied to go on talbe");
+    return false;
+  }
+}
+
+
   return (
     <Container fluid className="min-h-full w-full d-flex flex-column align-items-center py-2 bg-[#D3D3D3]">
       <h1 className="text-center text-3xl mb-2">Enter Todo Here</h1>
@@ -455,9 +283,43 @@ export default function FormPage() {
           {errors.time && <small className="text-danger">{errors.time}</small>}
         </Form.Group>
 
-        <Button variant="success" type="submit" className="w-100" disabled={loading}>
-          {loading ? "Saving..." : "Save"}
-        </Button>
+
+<div className="d-flex gap-2 mt-3 justify-around flex-wrap">
+  <Button
+    variant="primary"
+    type="button"
+    onClick={handleSaveClose}
+    disabled={loading}
+  >
+    {loading ? "Saving..." : "Save & Close"}
+  </Button>
+
+  <Button
+    variant="success"
+    type="button"
+    onClick={handleSaveStay}
+    disabled={loading}
+  >
+    {loading ? "Saving..." : "Save & Stay"}
+  </Button>
+
+  <Button
+    variant="warning"
+    type="button"
+    onClick={handleSaveNext}
+    disabled={loading}
+  >
+    {loading ? "Saving..." : "Save & Next"}
+  </Button>
+  <Button
+    variant="secondary"
+    type="button"
+    onClick={handleWatchTable}
+    disabled={loading}
+  >
+    {loading ? "Saving..." : "Redirect without Save"}
+  </Button>
+</div>
 
       </Form>
     </Container>

@@ -258,7 +258,12 @@ const handleSaveEdit = async () => {
 
         {/* Table View */}
         {/* laader start */}
-        {loading ? <p>"Loading"</p>
+        {loading ?
+        <div className="w-full h-[200px] border-amber-200 flex justify-center items-center">
+        <div class="spinner-border text-secondary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</div>
         :
          <>
         {!isGridView ? (
@@ -333,7 +338,6 @@ const handleSaveEdit = async () => {
     )}
   </div>
 </th>
-
 
                  <th
   onClick={() => handleSort("email")}
@@ -538,9 +542,8 @@ const handleSaveEdit = async () => {
             <FaAngleDoubleLeft />
           </Button>
 
-          <div className="px-1">
-            {/* Page <b>{currentPage}</b> of <b>{totalPages}</b> */}
-            Page {currentPage} of {totalPages}
+          <div className="px-1 text-[14px] md:text-[20px] flex gap-0.5 items-center">
+            Page <b>{currentPage}</b> of <b>{totalPages}</b>
           </div>
 
           <Button variant="outline-info" onClick={nextPage}>
