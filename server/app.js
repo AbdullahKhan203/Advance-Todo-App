@@ -21,13 +21,13 @@ const app=express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend URL
+    origin: process.env.CLIENT_URL, // your frontend URL
     credentials: true,
   }));
 
 app.use(cookieParser());  
 
-const PORT= 4000;
+const PORT=process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // very important for parsing JSON body

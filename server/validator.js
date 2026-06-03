@@ -9,8 +9,5 @@ const signupSchema=Joi.object({
     password: Joi.string().min(6).max(10).required(),
 });
 
-
-
-
 export const validateSignup = validator(signupSchema);
 
