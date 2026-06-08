@@ -24,10 +24,16 @@ app.use(
     origin: "http://localhost:5173", // your frontend URL
     credentials: true,
   }));
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   })
+// );
 
 app.use(cookieParser());  
 
-const PORT= 4000;
+const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // very important for parsing JSON body
