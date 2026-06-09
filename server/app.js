@@ -19,21 +19,21 @@ connectToDb();
 
 const app=express();
 
-app.use(
-  cors({
-    origin: "http://localhost:5173", // your frontend URL
-    credentials: true,
-  }));
 // app.use(
 //   cors({
-//     origin: true,
+//     origin: "http://localhost:5173", // your frontend URL
 //     credentials: true,
-//   })
-// );
+//   }));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());  
 
-const PORT =  process.env.PORT || 4000;
+const PORT =  4000;
 
 // Middleware
 app.use(express.json()); // very important for parsing JSON body
@@ -48,3 +48,6 @@ app.listen(PORT,()=>{
     console.log(`Server is listening on PORT ${PORT}`);
 })
 
+// app.listen(PORT, "0.0.0.0", () => {
+//   console.log(`Server running on ${PORT}`);
+// });
