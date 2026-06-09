@@ -33,7 +33,7 @@ app.use(
 
 app.use(cookieParser());  
 
-const PORT = process.env.PORT || 4000;
+const PORT =  process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // very important for parsing JSON body
